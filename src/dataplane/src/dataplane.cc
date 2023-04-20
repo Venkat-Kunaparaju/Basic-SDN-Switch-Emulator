@@ -3,6 +3,11 @@
 
 
 /*
+Use vectors to represent the header fields. Global variable that is a pointer to the current header vector. 
+Header vector gets updated, and pointer updated to point to header vector whenever change happens. 
+*/
+
+/*
 Used to update dataplane configuration based on specified changes in simplep4 program
 Check for valid data done in compiler
 Return: 1 on sucess and population of respective fields
