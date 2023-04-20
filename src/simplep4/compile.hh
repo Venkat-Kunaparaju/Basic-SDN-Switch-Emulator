@@ -1,5 +1,5 @@
 
-/* Example file */
+/* Example file. Can't be used because we need to dynamically change the dataplane functionality during runtime */
 
 /* How a header should get translated to, map the bits the user specifies into a char array 
 of the rounded up to nearest bytes. Name is the same as the user specifies 

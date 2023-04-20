@@ -1,15 +1,24 @@
 
 #include <main.hh>
 
+
 /*
- Poll in startup state until simpleP4 program compiled 
-Return: 1 on success and population of respective fields
+Used to update dataplane configuration based on specified changes in simplep4 program
+Check for valid data done in compiler
+Return: 1 on sucess and population of respective fields
+*/
+int population() {
+
+    return 1;
+}
+/*
+ Set up initial config and poll in startup state until simpleP4 program compiled 
+Return: 1 once done polling
 */
 int startUp() {
     pipe(p4ToDataplane);
     while(writtenToDataplane == 0); //Poll until writtenToDataplane is 1
-
-
+    population();
     writtenToDataplane = 0; //Reset value to 0 once done reading
     return 1;
 }
