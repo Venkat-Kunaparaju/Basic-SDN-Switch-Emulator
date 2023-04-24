@@ -5,6 +5,7 @@ int p4ToDataplane[2];   //Pipe to communicate MAT information simplep4 program t
 int writtenToDataplane; //Set to 0 if data is empty, 1 if data exists
 
 
+
 /* Vectors used to validate information */
 std::vector<std::string> header; //Collection of Fields of header of packet
 std::vector<int> headerMetadata; //Parallel to header vector to contain bits considered in field
@@ -26,7 +27,7 @@ struct table
     std::vector<std::string> exactFields; //Fields that need to be spcified
     std::vector<std::string> couldFields; //Fields that could be specified
 
-    std::vector<fields> fieldsVect;   //Fields to match with in an entry; Collection of entries
+    std::vector<fields * > fieldsVect;   //Fields to match with in an entry; Collection of entries
     std::vector<std::string> actions; //Parallel with fieldsVect; Actions associated with entry.
     std::string default_action; //Default action if no matching entries
 
@@ -36,6 +37,8 @@ struct table
 
 struct pipeline
 {
-    std::vector<table> tableVect; //Tables composing pipeline
+    std::vector<table *> tableVect; //Tables composing pipeline
     int numTables;
 };
+
+struct pipeline * simplePipeline;
