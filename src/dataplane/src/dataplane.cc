@@ -1,11 +1,13 @@
 
-#include <main.hh>
+#include <dataplane.hh>
+
 
 
 /*
 Use vectors to represent the header fields. Global variable that is a pointer to the current header vector. 
 Header vector gets updated, and pointer updated to point to header vector whenever change happens. 
 */
+
 
 /* Temp function to figure out mapping of fields */
 int dummyStart() {
@@ -17,8 +19,8 @@ int dummyStart() {
     std::string tempMetadata[] = {"Ingress Port", "Egress Port"};
     std::string tempActions[] = {"Drop", "Forward"};
 
-    int tempLengthHeader = 5;
-    int tempLengthPerm = 2;
+    int tempLengthHeader = tempHeader->length();
+    int tempLengthPerm = tempMetadata->length();
 
     /* Populate initial field values */
     for (int i = 0; i < tempLengthHeader; i++) {
@@ -43,6 +45,8 @@ int dummyStart() {
     tempExactFields[1][1] = "Port Dest";
     tempExactFields[2][0] = "IP Src";
     tempExactFields[2][1] = "Protocol";
+
+
 
     /* Initialize the 3 tables */
     for (int i = 0; i < 3; i++) {
@@ -83,6 +87,7 @@ Check for valid data done in compiler
 Return: 1 on sucess and population of respective fields
 */
 int population() {
+    std::cout << "POPULATION\n";
     return 1;
 }
 /*
@@ -92,12 +97,13 @@ Return: 1 once done polling
 int startUp() {
     pipe(p4ToDataplane);
     dummyStart();
+    writtenToDataplane = 0;
     while(writtenToDataplane == 0); //Poll until writtenToDataplane is 1
     population();
     writtenToDataplane = 0; //Reset value to 0 once done reading
     return 1;
 }
-int main() {
+int dataplaneMain() {
     std::cout << "DATAPLANE\n";
     startUp();
     return 0;

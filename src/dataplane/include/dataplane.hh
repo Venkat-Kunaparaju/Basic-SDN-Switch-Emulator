@@ -1,9 +1,9 @@
 
 #include <vector>
+#include <../../../include/basic.hh>
 
 int p4ToDataplane[2];   //Pipe to communicate MAT information simplep4 program to dataplane
 int writtenToDataplane; //Set to 0 if data is empty, 1 if data exists
-
 
 
 /* Vectors used to validate information */
@@ -29,7 +29,7 @@ struct table
 
     std::vector<fields * > fieldsVect;   //Fields to match with in an entry; Collection of entries
     std::vector<std::string> actions; //Parallel with fieldsVect; Actions associated with entry.
-    std::string default_action; //Default action if no matching entries
+    std::string def_action; //Default action if no matching entries
 
     int maxNumEntries;
     int numEntries;

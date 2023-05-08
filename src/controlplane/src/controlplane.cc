@@ -1,7 +1,8 @@
+#include <controlplane.hh>
 
-#include <main.hh>
 
-int main() {
-    std::cout << "CONTROL\n";
+int controlplaneMain() {
+    printf("CONTROL\n");
+    //writtenToDataplane = 1;
     return 0;
 }
