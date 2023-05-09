@@ -96,7 +96,7 @@ Return: 1 once done polling
 */
 int startUp() {
     pipe(p4ToDataplane);
-    dummyStart();
+    //dummyStart();
     writtenToDataplane = 0;
     while(writtenToDataplane == 0); //Poll until writtenToDataplane is 1
     population();
