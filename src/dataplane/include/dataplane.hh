@@ -2,7 +2,11 @@
 #include <vector>
 #include <../../../include/basic.hh>
 
-pthread_mutex_t readFromControlplane; //Set to 0 if data is empty, 1 if data exists
+#define NUMTHREADSDP 1
+
+pthread_mutex_t readFromControlplane; //Mutex lock to wake dataplane up if data needs to be updated
+int doneDataplane; //Communicates when dataplane is done populating
+
 
 
 /* Vectors used to validate information */

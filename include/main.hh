@@ -8,4 +8,5 @@ extern int controlplaneMain(); //Controlplane main
 
 extern int writtenToDataplane; //Set by controlplane
 extern pthread_mutex_t readFromControlplane; //Used by dataplane
+extern int doneDataplane; //Used by dataplane
 
