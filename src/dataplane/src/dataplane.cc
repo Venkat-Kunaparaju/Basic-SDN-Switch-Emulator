@@ -95,16 +95,14 @@ int population() {
 Return: 1 once done polling
 */
 int startUp() {
-    pipe(p4ToDataplane);
     //dummyStart();
-    writtenToDataplane = 0;
-    while(writtenToDataplane == 0); //Poll until writtenToDataplane is 1
+    pthread_mutex_lock(&readFromControlplane); //Poll until writtenToDataplane is 1
     population();
-    writtenToDataplane = 0; //Reset value to 0 once done reading
+    pthread_mutex_unlock(&readFromControlplane); //Reset value to 0 once done reading
     return 1;
 }
 int dataplaneMain() {
     std::cout << "DATAPLANE\n";
-    //startUp();
+    startUp();
     return 0;
 }
