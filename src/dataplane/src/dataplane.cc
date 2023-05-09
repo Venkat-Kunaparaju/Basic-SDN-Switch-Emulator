@@ -105,6 +105,6 @@ int startUp() {
 }
 int dataplaneMain() {
     std::cout << "DATAPLANE\n";
-    startUp();
+    //startUp();
     return 0;
 }
