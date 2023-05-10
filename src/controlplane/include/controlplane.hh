@@ -1,6 +1,10 @@
 #include <../../../include/basic.hh>
 
 
-int writtenToDataplane;
+pthread_mutex_t writtenToDataplane; //Used to communicate information from control to data
+int doneControlplane;
 
-char writeControlplaneBuffer[4096];
+char writeDataplaneBuffer[4096]; //Buffer for information to send to dataplane
+
+
+

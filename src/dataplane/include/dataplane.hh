@@ -7,7 +7,7 @@
 pthread_mutex_t readFromControlplane; //Mutex lock to wake dataplane up if data needs to be updated
 int doneDataplane; //Communicates when dataplane is done populating
 
-char readDataplaneBuffer[4096]; //Buffer to read info from controlplane
+char readControlplaneBuffer[4096]; //Buffer to read info from controlplane
 
 
 int dummyStart();

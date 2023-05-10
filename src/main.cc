@@ -31,17 +31,21 @@ int threadinit() {
 
 //Set up initial state of switchboard
 int init() {
-    pthread_mutex_init(&readFromControlplane, NULL); //Communicate when the dataplane should wake up and read
+    pthread_mutex_init(&readFromControlplane, NULL); //Communicate when the dataplane should wake up and read from controlplane
     doneDataplane = 0; //Tells switchboard when dataplane is done
 
+    pthread_mutex_init(&writtenToDataplane, NULL); //Communicate when the dataplane should wake up and read from controlplane
+    doneControlplane = 0; //Tells switchboard when dataplane is done
+
     pthread_mutex_lock(&readFromControlplane); //Initial lock
-    writtenToDataplane = 0; //Controlplane sets variable to know when information needs to be written to dataplane
     return 1;
 }
 
 
 //Function to test implementation
 int testFunc() {
+
+    //Dataplane reading from controlplane data
     pthread_mutex_unlock(&readFromControlplane);
     while(doneDataplane == 0);
     pthread_mutex_lock(&readFromControlplane);
@@ -51,6 +55,18 @@ int testFunc() {
     pthread_mutex_lock(&readFromControlplane);
     doneDataplane = 0;
 
+    while (true) { //While loop to wake up switchboard whenever there is data needed to be copied to dataplane
+        if (doneControlplane == 0) {
+            //Controlplane writing data to dataplane
+            pthread_mutex_lock(&writtenToDataplane);
+            //Do whatever, copying buffer data etc.
+            std::cout << "COPYING BUFFER DATA\n";
+            pthread_mutex_unlock(&writtenToDataplane);
+            doneControlplane = 1;
+            usleep(1);
+        }
+    }
+    for (int i = 0; i < 10000; i++); //Poll for a bit to allow other threads to execute
     return 1;
 }
 
