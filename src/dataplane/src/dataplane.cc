@@ -17,7 +17,7 @@ int dummyStart() {
     int tempHeaderMetadata[] = {32, 32, 16, 16, 8};
 
     std::string tempMetadata[] = {"Ingress Port", "Egress Port"};
-    std::string tempActions[] = {"Drop", "Forward"};
+    std::string tempActions[] = {"Drop", "Forward", "NoAction"};
 
     int tempLengthHeader = tempHeader->length();
     int tempLengthPerm = tempMetadata->length();

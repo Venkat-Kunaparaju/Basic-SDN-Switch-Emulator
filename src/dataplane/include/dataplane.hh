@@ -41,10 +41,15 @@ struct table
 
     std::vector<fields * > fieldsVect;   //Fields to match with in an entry; Collection of entries
     std::vector<std::string> actions; //Parallel with fieldsVect; Actions associated with entry.
+    std::vector<int> valActions; //Parallel with actions; Value associated with each action
     std::string def_action; //Default action if no matching entries
 
-    int maxNumEntries;
-    int numEntries;
+    int maxNumEntries; //Max number of possible entries
+    int numEntries; //Number of entries in table currently
+
+    bool inEgress; //True if this is an ingress table, false if this is an egress table
+
+
 };
 
 struct pipeline

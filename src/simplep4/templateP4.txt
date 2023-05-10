@@ -1,0 +1,34 @@
+/* Template simpleP4 pogram */
+
+
+/* 
+    Configure physical switch characteristics
+    Number of ingress ports, number of egress ports
+    (Port 0 reserved for controlplane port)
+*/
+numIngressPorts:[number]
+numEgressPorts:[number]
+
+
+
+/* 
+    Configure software switch characteristics
+
+    Packet header with bits and name for each field (packets are homogenous)
+
+    Ingress tables with 
+        potential actions (chosen from predifned set), fields to exact match on, fields to could match on,
+        default action when there are no matching entries (this would usually be send to controlplane to learn), max number of entries
+
+*/ 
+Ingress {
+    table {
+        exact = {
+            [Name of exact field 1]
+            [Name of exact field 2]
+        }
+    }
+
+}
+
+
