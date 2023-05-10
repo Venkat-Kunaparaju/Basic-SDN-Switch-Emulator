@@ -7,6 +7,12 @@
 pthread_mutex_t readFromControlplane; //Mutex lock to wake dataplane up if data needs to be updated
 int doneDataplane; //Communicates when dataplane is done populating
 
+pthread_mutex_t writeToControlplane; //Mutex lock to wake up switchboard when data needs to be copied to controlplane
+int doneWriteDataplane;
+
+pthread_mutex_t readFromSimplep4; //Mutex lock to wake dataplane up if config needs to be updated
+int doneReadp4Dataplane;
+
 char readControlplaneBuffer[4096]; //Buffer to read info from controlplane
 
 

@@ -11,20 +11,21 @@ int controlInit() {
 //Test function for controlplane
 int controlTest() {
 
-    /* Write data to buffer here */
+
+    // /* Write data to buffer here */
     pthread_mutex_unlock(&writtenToDataplane); //Unlock done when it needs data to be processed
 
     while(doneControlplane == 0);
     pthread_mutex_lock(&writtenToDataplane);
     doneControlplane = 0; //Continue execution once switchboard finishes processing controlplane
 
-    //Second call
+    // //Second call
 
-    pthread_mutex_unlock(&writtenToDataplane); //Unlock done when it needs data to be processed
+    // pthread_mutex_unlock(&writtenToDataplane); //Unlock done when it needs data to be processed
 
-    while(doneControlplane == 0);
-    pthread_mutex_lock(&writtenToDataplane);
-    doneControlplane = 0; //Continue execution once switchboard finishes processing controlplane
+    // while(doneControlplane == 0);
+    // pthread_mutex_lock(&writtenToDataplane);
+    // doneControlplane = 0; //Continue execution once switchboard finishes processing controlplane
 
     std::cout << "CONTINUING EXECUTION\n";
     return 1;
