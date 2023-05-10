@@ -21,14 +21,41 @@ numEgressPorts:[number]
         default action when there are no matching entries (this would usually be send to controlplane to learn), max number of entries
 
 */ 
-Ingress {
-    table {
-        exact = {
-            [Name of exact field 1]
-            [Name of exact field 2]
+header { 
+    /* Example IP/TCP header */
+    bit<4> version;
+    bit<28> discard;
+    bit<32> discard;
+    bit<8> TTL;
+    bit<8> protocol;
+    bit<16> checksum;
+    bit<32> srcaddr;
+    bit<32> destaddr;
+}
+
+
+[Ingress/Egress] {
+    tables = {
+        [Name of table 1] = {
+            exact = {
+                [Name of exact field 1];
+                [Name of exact field N];
+            }
+            could = {
+                [Name of could field 1];
+                [Name of could field N];
+            }
+            actions = {
+                [Potential action 1];
+                [Potential action 2];
+            }
+            maxNumEntries = [Maximum number of entries];
+            defaultAcion = [Default action chosen from actions];
+        }
+        [Name of table N] = {
+            ...
         }
     }
-
 }
 
 

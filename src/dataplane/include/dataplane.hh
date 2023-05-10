@@ -49,6 +49,8 @@ struct table
 
     bool inEgress; //True if this is an ingress table, false if this is an egress table
 
+    std::string name; //Name of the table
+
 
 };
 
