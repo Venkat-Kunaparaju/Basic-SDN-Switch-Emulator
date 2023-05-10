@@ -81,25 +81,28 @@ int dummyStart() {
 
 }
 
+// Thread runs this and blocks on data coming in from control plane. Runs correct operation based on data.
+int dispatcher() {
+    while(true) {
+        if (doneDataplane == 0) {
+            pthread_mutex_lock(&readFromControlplane); //Poll until writtenToDataplane is 1
+            //Determine What to run based on data in readFromControlPlane
+            population();
+            pthread_mutex_unlock(&readFromControlplane); //Reset value to 0 once done reading
+            doneDataplane = 1;
+            usleep(1);
+        }
+    }
+    return 1;
+}
+
 /*
 Used to update dataplane configuration based on specified changes in simplep4 program
 Check for valid data done in compiler
 Return: 1 on sucess and population of respective fields
 */
-int population(int forever) {
-    while(true) {
-        if (doneDataplane == 0) {
-            pthread_mutex_lock(&readFromControlplane); //Poll until writtenToDataplane is 1
-            dummyStart();
-            std::cout << "POPULATION\n";
-            pthread_mutex_unlock(&readFromControlplane); //Reset value to 0 once done reading
-            doneDataplane = 1;
-            usleep(1);
-            if (!(forever)) {
-                break;
-            }
-        }
-    }
+int population() {
+    std::cout << "POPULATION\n";
     return 1;
 }
 /*
@@ -108,10 +111,10 @@ Return: 1 once done polling
 */
 int startUp() {
     //dummyStart();
-    population(0);
+    //population();
     pthread_t threads[NUMTHREADSDP];
 #if NUMTHREADSDP == 1
-    pthread_create(&threads[0], NULL, (void * (*)(void *))population, (void *)1);
+    pthread_create(&threads[0], NULL, (void * (*)(void *))dispatcher, (void *)1);
 #endif
     return 1;
 }
