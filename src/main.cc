@@ -39,14 +39,25 @@ int init() {
     return 1;
 }
 
+
+//Function to test implementation
+int testFunc() {
+    pthread_mutex_unlock(&readFromControlplane);
+    while(doneDataplane == 0);
+    pthread_mutex_lock(&readFromControlplane);
+    doneDataplane = 0;
+    pthread_mutex_unlock(&readFromControlplane);
+    while(doneDataplane == 0);
+    pthread_mutex_lock(&readFromControlplane);
+    doneDataplane = 0;
+
+    return 1;
+}
+
 int main() {
     fprintf(stderr, "MAIN\n");
     init();
     threadinit();
-    pthread_mutex_unlock(&readFromControlplane);
-    while(doneDataplane == 0);
-    doneDataplane = 1;
-    pthread_mutex_lock(&readFromControlplane);
-    //while(true);
+    testFunc();
     return 1;
 }

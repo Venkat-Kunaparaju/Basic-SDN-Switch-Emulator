@@ -74,7 +74,7 @@ int dummyStart() {
         }
     }
 
-    fprintf(stderr, "Finished Test\n");
+    //fprintf(stderr, "Finished Test\n");
 
     return 1;
 
@@ -90,6 +90,7 @@ int population(int forever) {
     while(true) {
         if (doneDataplane == 0) {
             pthread_mutex_lock(&readFromControlplane); //Poll until writtenToDataplane is 1
+            dummyStart();
             std::cout << "POPULATION\n";
             pthread_mutex_unlock(&readFromControlplane); //Reset value to 0 once done reading
             doneDataplane = 1;

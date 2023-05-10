@@ -2,3 +2,5 @@
 
 
 int writtenToDataplane;
+
+char writeControlplaneBuffer[4096];
