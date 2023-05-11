@@ -13,7 +13,7 @@ int doneWriteDataplane;
 pthread_mutex_t readFromSimplep4; //Mutex lock to wake dataplane up if config needs to be updated
 int doneReadp4Dataplane;
 
-char readControlplaneBuffer[4096]; //Buffer to read info from controlplane
+char readControlplaneBuffer[BUFFERSIZE]; //Buffer to read info from controlplane
 
 
 int dummyStart();

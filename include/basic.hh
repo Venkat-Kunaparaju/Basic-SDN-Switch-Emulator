@@ -5,3 +5,5 @@
 #include <unistd.h>
 #include <pthread.h>
 
+#define BUFFERSIZE 4906
+

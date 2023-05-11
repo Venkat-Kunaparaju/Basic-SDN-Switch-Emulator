@@ -18,8 +18,15 @@ extern int doneDataplane; //Used by dataplane
 extern pthread_mutex_t writeToControlplane; //Used by dataplane
 extern int donewriteDataplane; //Used by dataplane
 
+extern char readControlplaneBuffer[BUFFERSIZE];
+extern char writeDataplnaeBuffer[BUFFERSIZE];
 
 
+/* Switchboard data */
+char tempBuffer[4096];
+
+
+/* Switchboard functions */
 int dummyFunc();
 int threadinit();
 int init();

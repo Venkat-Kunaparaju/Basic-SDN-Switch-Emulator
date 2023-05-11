@@ -57,6 +57,7 @@ int init() {
     donewriteDataplane = 0;
 
     pthread_mutex_init(&readFromDataplane, NULL); 
+    doneReadControlplane = 0;
     
 
     pthread_mutex_lock(&readFromControlplane); //Initial lock
@@ -75,6 +76,11 @@ int controlToData() {
             if (dataIsValid) {
                 /* DO Dataplane copying from controlplane data HERE */
                 std::cout << "COPYING BUFFER DATA\n";
+
+                /* Test Copying */
+                memcpy(readControlplaneBuffer, writeDataplnaeBuffer, BUFFERSIZE);
+
+
                 pthread_mutex_unlock(&readFromControlplane); //Unlock to let know dataplane that it has to read
                 while(doneDataplane == 0);
                 pthread_mutex_lock(&readFromControlplane);
