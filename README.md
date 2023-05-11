@@ -1,5 +1,4 @@
-# 
-Programmable SDN Switch Emulator
+# Programmable SDN Switch Emulator
 
 User writes program in .simplep4 file format to specify forwarding logic for data plane. It is then compiled using lex and yacc and added to the data plane logic. Explicity translate header information into structs in a header file
 
