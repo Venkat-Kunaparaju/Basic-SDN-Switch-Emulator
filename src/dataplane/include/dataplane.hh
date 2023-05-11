@@ -21,6 +21,7 @@ int dispatcher();
 int population();
 int startUp();
 int dataplaneMain();
+int dataplaneInit();
 
 
 

@@ -43,11 +43,21 @@ int threadinit() {
 
 //Set up initial state of switchboard
 int init() {
-    pthread_mutex_init(&readFromControlplane, NULL); //Communicate when the dataplane should wake up and read from controlplane
-    doneDataplane = 0; //Tells switchboard when dataplane is done
 
-    pthread_mutex_init(&writtenToDataplane, NULL); //Communicate when the dataplane should wake up and read from controlplane
+    /* control ->data */
+    pthread_mutex_init(&readFromControlplane, NULL); //Communicate when the switchboard should wake up and read from controlplane
+    doneDataplane = 0; //Tells contrtolplane when switcboard is done
+
+    pthread_mutex_init(&writtenToDataplane, NULL); //Communicate when the dataplane should wake up and read from switchboard
     doneControlplane = 0; //Tells switchboard when dataplane is done
+
+
+    /* data -> control */
+    pthread_mutex_init(&writeToControlplane, NULL); 
+    donewriteDataplane = 0;
+
+    pthread_mutex_init(&readFromDataplane, NULL); 
+    
 
     pthread_mutex_lock(&readFromControlplane); //Initial lock
     return 1;

@@ -9,10 +9,15 @@ extern int controlplaneMain(); //Controlplane main
 
 extern pthread_mutex_t writtenToDataplane; //Used by controlplane
 extern int doneControlplane; //Used by controlplane
+extern pthread_mutex_t readFromDataplane; //Used by controlplane
+extern int doneReadControlplane; //Used by controlplanne
 
 
 extern pthread_mutex_t readFromControlplane; //Used by dataplane
 extern int doneDataplane; //Used by dataplane
+extern pthread_mutex_t writeToControlplane; //Used by dataplane
+extern int donewriteDataplane; //Used by dataplane
+
 
 
 int dummyFunc();

@@ -105,6 +105,20 @@ int population() {
     std::cout << "POPULATION\n";
     return 1;
 }
+
+
+//Initialize dataplane
+int dataplaneInit() {
+    /* Mutexes */
+
+
+    pthread_t threads[NUMTHREADSDP];
+#if NUMTHREADSDP == 1
+    pthread_create(&threads[0], NULL, (void * (*)(void *))dispatcher, (void *)1);
+#endif
+
+}
+
 /*
  Set up initial config and poll in startup state until simpleP4 program compiled 
 Return: 1 once done polling
@@ -112,10 +126,7 @@ Return: 1 once done polling
 int startUp() {
     //dummyStart();
     //population();
-    pthread_t threads[NUMTHREADSDP];
-#if NUMTHREADSDP == 1
-    pthread_create(&threads[0], NULL, (void * (*)(void *))dispatcher, (void *)1);
-#endif
+    dataplaneInit();
     return 1;
 }
 int dataplaneMain() {
