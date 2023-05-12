@@ -1,6 +1,19 @@
 #include <controlplane.hh>
 
 
+/* Function used for temp testing */
+int testTemp() {
+    std::cerr << "TESTED\n";
+
+    return 1;
+}
+
+//Init for establishing functions for interfacing
+int initFunctions() {
+    writeFuncMap["Write"] = writeDataToDataplane;
+    return 1;
+}
+
 //Init for controlplane
 int controlInit() {
     /* Mutexes */
@@ -11,7 +24,11 @@ int controlInit() {
 #if NUMTHREADSCP == 1
     pthread_create(&threads[0], NULL, (void * (*)(void *))dispatcherControlplane, (void *)1);
 #endif
+
+
+    initFunctions();
     return 1;
+
 }
 
 // Function to write data to dataplane
@@ -25,7 +42,7 @@ int writeDataToDataplane(char * data, int size) {
     return 1;
 }
 
-// Thread runs this and blocks on data coming in from control plane. Runs correct operation based on data.
+// Thread runs this and blocks on data coming in from data plane. Runs correct operation based on data.
 int dispatcherControlplane() {
     while (true) {
         if (doneReadControlplane == 0) {
@@ -48,13 +65,15 @@ int controlTest() {
 
     /* Write data to buffer here */
     /* Test data to write to buffer */
-    writeDataToDataplane(testString1, BUFFERSIZE);
+    userFuncMap["Miss"]();
+    //funcMap["Write"]();
+    //writeDataToDataplane(testString1, BUFFERSIZE);
 
     std::cout << "CONTINUING EXECUTION\n";
     return 1;
 }
 
-
+//Main function called as thread by main
 int controlplaneMain() {
     std::cout << "CONTROL\n";
     controlInit();

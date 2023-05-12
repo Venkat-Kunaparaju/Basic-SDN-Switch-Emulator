@@ -6,6 +6,7 @@
 extern int startUp();
 extern int dataplaneMain(); //Dataplane main
 extern int controlplaneMain(); //Controlplane main
+extern int controlMain(); //Usercontrolplane main
 
 extern pthread_mutex_t writtenToDataplane; //Used by controlplane
 extern int doneControlplane; //Used by controlplane
@@ -25,10 +26,6 @@ extern char writeDataplaneBuffer[BUFFERSIZE]; //Used by controlplane
 extern char readDataplaneBuffer[BUFFERSIZE]; //Used by controlplane
 
 
-/* Switchboard data */
-char tempBuffer[4096];
-
-
 /* Switchboard functions */
 int dummyFunc();
 int threadinit();
@@ -38,6 +35,7 @@ int main();
 int controlToData();
 int dataToControl();
 int simplep4ToData();
+
 
 
 

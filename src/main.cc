@@ -62,6 +62,10 @@ int init() {
     doneReadControlplane = 0;
     
     pthread_mutex_lock(&readFromDataplane);
+
+    //Set up usercontrolplane
+    //funcMap["Write"] = testTemp;
+    controlMain();
     return 1;
 }
 
