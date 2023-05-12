@@ -51,16 +51,17 @@ int init() {
     pthread_mutex_init(&writtenToDataplane, NULL); //Communicate when the dataplane should wake up and read from switchboard
     doneControlplane = 1; //Tells switchboard when dataplane is done; Needs to be initially 1 (race condition)
 
+    pthread_mutex_lock(&readFromControlplane); //Initial lock 
+
 
     /* data -> control */
     pthread_mutex_init(&writeToControlplane, NULL); 
     doneWriteDataplane = 1;
 
     pthread_mutex_init(&readFromDataplane, NULL); 
-    doneReadControlplane = 1;
+    doneReadControlplane = 0;
     
-
-    pthread_mutex_lock(&readFromControlplane); //Initial lock
+    pthread_mutex_lock(&readFromDataplane);
     return 1;
 }
 
@@ -76,7 +77,7 @@ int controlToData() {
 
             if (dataIsValid) {
                 /* DO Dataplane copying from controlplane data HERE */
-                std::cout << "COPYING BUFFER DATA\n";
+                std::cout << "COPYING BUFFER DATA TO DATAPLANE\n";
 
                 /* Test Copying */
                 memcpy(readControlplaneBuffer, writeDataplaneBuffer, BUFFERSIZE);
@@ -92,13 +93,41 @@ int controlToData() {
             doneControlplane = 1;
             usleep(1);
         }
-        std::cout << "Done\n";
+        // std::cout << "Done\n";
     }
     return 1;
 }
 
 int dataToControl() {
+    bool dataIsValid = true;
+    while (true) { //While loop to wake up switchboard whenever there is data needed to be copied to dataplane from contorlplane;
+        if (doneWriteDataplane == 0) {
+            //Controlplane writing data to dataplane
+            pthread_mutex_lock(&writeToControlplane);
+                //fprintf(stderr, "%s\n", writeDataplaneBuffer);
 
+            /* CHeck if data is indeed valid here, if not then write back to controlplane buffer with an error */
+
+            if (dataIsValid) {
+                /* DO Dataplane copying from controlplane data HERE */
+                std::cout << "COPYING BUFFER DATA TO CONTROLPLANE\n";
+
+                /* Test Copying */
+                memcpy(readDataplaneBuffer, writeControlplaneBuffer, BUFFERSIZE);
+
+                pthread_mutex_unlock(&readFromDataplane); //Unlock to let know dataplane that it has to read
+                while(doneReadControlplane == 0);
+                pthread_mutex_lock(&readFromDataplane);
+                doneReadControlplane = 0;                   
+            }
+
+
+            pthread_mutex_unlock(&writeToControlplane);
+            doneWriteDataplane = 1;
+            usleep(1);
+        }
+        // std::cout << "Done\n";
+    }
     return 1;
 }
 
@@ -115,8 +144,8 @@ int testFunc() {
     // while(doneDataplane == 0);
     // pthread_mutex_lock(&readFromControlplane);
     // doneDataplane = 0;
-
-    for (int i = 0; i < 1000000; i++); //Poll for a bit to allow other threads to execute
+    while(true);
+    for (int i = 0; i < 100000000; i++); //Poll for a bit to allow other threads to execute
     return 1;
 }
 

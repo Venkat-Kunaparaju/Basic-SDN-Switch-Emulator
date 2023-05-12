@@ -14,14 +14,19 @@ pthread_mutex_t readFromSimplep4; //Mutex lock to wake dataplane up if config ne
 int doneReadp4Dataplane;
 
 char readControlplaneBuffer[BUFFERSIZE]; //Buffer to read info from controlplane
+char writeControlplaneBuffer[BUFFERSIZE]; //Buffer to write infrom to controlplane
 
+
+char * testString2 = "Hey! This is a test to write to controlplane from the dataplane\n";
 
 int dummyStart();
-int dispatcher();
+int dispatcherDataplane();
 int population();
 int startUp();
 int dataplaneMain();
 int dataplaneInit();
+int writeDataToControlplane(char *, int);
+int dataplaneTest();
 
 
 

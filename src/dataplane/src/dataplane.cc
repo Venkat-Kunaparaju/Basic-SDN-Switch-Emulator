@@ -82,21 +82,32 @@ int dummyStart() {
 }
 
 // Thread runs this and blocks on data coming in from control plane. Runs correct operation based on data.
-int dispatcher() {
+int dispatcherDataplane() {
     while(true) {
         if (doneDataplane == 0) {
-            pthread_mutex_lock(&readFromControlplane); //Poll until writtenToDataplane is 1
+            pthread_mutex_lock(&readFromControlplane); //Wake up when there is something to be read
             //Determine What to run based on data in readFromControlPlane
 
             /* Read from the buffer */
             fprintf(stdout, "%s", readControlplaneBuffer);
 
             //population();
-            pthread_mutex_unlock(&readFromControlplane); //Reset value to 0 once done reading
-            doneDataplane = 1;
+            pthread_mutex_unlock(&readFromControlplane); 
+            doneDataplane = 1; //Indicate done
             usleep(1);
         }
     }
+    return 1;
+}
+
+// Helper function to write data to controlplane
+int writeDataToControlplane(char * data, int size) {
+    memcpy(writeControlplaneBuffer, data, size);
+    pthread_mutex_unlock(&writeToControlplane); //Unlock done when it needs data to be processed
+    while(doneWriteDataplane == 0);
+    pthread_mutex_lock(&writeToControlplane);
+    doneWriteDataplane = 0; //Continue execution once switchboard finishes processing controlplane
+
     return 1;
 }
 
@@ -114,12 +125,21 @@ int population() {
 //Initialize dataplane
 int dataplaneInit() {
     /* Mutexes */
+    pthread_mutex_lock(&writeToControlplane);
+    doneWriteDataplane = 0;
 
 
     pthread_t threads[NUMTHREADSDP];
 #if NUMTHREADSDP == 1
-    pthread_create(&threads[0], NULL, (void * (*)(void *))dispatcher, (void *)1);
+    pthread_create(&threads[0], NULL, (void * (*)(void *))dispatcherDataplane, (void *)1);
 #endif
+    return 1;
+}
+
+//Function for testing implementation
+int dataplaneTest() {
+    writeDataToControlplane(testString2, BUFFERSIZE);
+
     return 1;
 }
 
@@ -136,5 +156,6 @@ int startUp() {
 int dataplaneMain() {
     std::cout << "DATAPLANE\n";
     startUp();
+    dataplaneTest();
     return 0;
 }
