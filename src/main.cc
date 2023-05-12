@@ -49,15 +49,15 @@ int init() {
     doneDataplane = 0; //Tells contrtolplane when switcboard is done
 
     pthread_mutex_init(&writtenToDataplane, NULL); //Communicate when the dataplane should wake up and read from switchboard
-    doneControlplane = 0; //Tells switchboard when dataplane is done
+    doneControlplane = 1; //Tells switchboard when dataplane is done; Needs to be initially 1 (race condition)
 
 
     /* data -> control */
     pthread_mutex_init(&writeToControlplane, NULL); 
-    donewriteDataplane = 0;
+    doneWriteDataplane = 1;
 
     pthread_mutex_init(&readFromDataplane, NULL); 
-    doneReadControlplane = 0;
+    doneReadControlplane = 1;
     
 
     pthread_mutex_lock(&readFromControlplane); //Initial lock
@@ -70,6 +70,7 @@ int controlToData() {
         if (doneControlplane == 0) {
             //Controlplane writing data to dataplane
             pthread_mutex_lock(&writtenToDataplane);
+                //fprintf(stderr, "%s\n", writeDataplaneBuffer);
 
             /* CHeck if data is indeed valid here, if not then write back to controlplane buffer with an error */
 
@@ -78,8 +79,7 @@ int controlToData() {
                 std::cout << "COPYING BUFFER DATA\n";
 
                 /* Test Copying */
-                memcpy(readControlplaneBuffer, writeDataplnaeBuffer, BUFFERSIZE);
-
+                memcpy(readControlplaneBuffer, writeDataplaneBuffer, BUFFERSIZE);
 
                 pthread_mutex_unlock(&readFromControlplane); //Unlock to let know dataplane that it has to read
                 while(doneDataplane == 0);
@@ -92,6 +92,7 @@ int controlToData() {
             doneControlplane = 1;
             usleep(1);
         }
+        std::cout << "Done\n";
     }
     return 1;
 }

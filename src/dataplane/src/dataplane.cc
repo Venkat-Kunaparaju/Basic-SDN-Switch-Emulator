@@ -87,7 +87,11 @@ int dispatcher() {
         if (doneDataplane == 0) {
             pthread_mutex_lock(&readFromControlplane); //Poll until writtenToDataplane is 1
             //Determine What to run based on data in readFromControlPlane
-            population();
+
+            /* Read from the buffer */
+            fprintf(stdout, "%s", readControlplaneBuffer);
+
+            //population();
             pthread_mutex_unlock(&readFromControlplane); //Reset value to 0 once done reading
             doneDataplane = 1;
             usleep(1);
@@ -116,7 +120,7 @@ int dataplaneInit() {
 #if NUMTHREADSDP == 1
     pthread_create(&threads[0], NULL, (void * (*)(void *))dispatcher, (void *)1);
 #endif
-
+    return 1;
 }
 
 /*
