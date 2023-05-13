@@ -37,15 +37,28 @@ int threadinit() {
         //pthread_join(threads[i], NULL);
     }
 #endif
+#if NUMTHREAD == 4
+    //Establish workload for each thread
+    threadFuncs[0] = (void *) dataplaneMain;
+    threadFuncs[1] = (void *) controlplaneMain;
+    threadFuncs[2] = (void *) dummyFunc;
+    threadFuncs[3] = (void *) compileMain;
+    for (int i = 0; i < NUMTHREAD; i++) { //Create Threads 
+        pthread_create(&threads[i], NULL, (void * (*)(void *))threadFuncs[i], NULL);
+    }
+    for (int i = 0; i < NUMTHREAD; i++) {
+        //pthread_join(threads[i], NULL);
+    }
+#endif
 
-    pthread_t interThreads[NUMTHREAD];
-    void * interThreadFuncs[NUMTHREAD];
+    pthread_t interThreads[NUMTHREADMAIN];
+    void * interThreadFuncs[NUMTHREADMAIN];
     interThreadFuncs[0] = (void *) controlToData;
     interThreadFuncs[1] = (void *) dataToControl;
     interThreadFuncs[2] = (void *) simplep4ToData;
     /* data -> control, control -> data, simplep4 -> data. 3 threads in total to handle each function in total*/
 #if MUTEX
-    for (int i = 0; i < NUMTHREAD; i++) {
+    for (int i = 0; i < NUMTHREADMAIN; i++) {
         pthread_create(&interThreads[i], NULL, (void * (*)(void *))interThreadFuncs[i], NULL);
     }
 #endif
@@ -71,8 +84,17 @@ int init() {
 
     pthread_mutex_init(&readFromDataplane, NULL); 
     doneReadControlplane = 0;
-    
+
     pthread_mutex_lock(&readFromDataplane);
+
+
+    /* p4 -> data */
+    pthread_mutex_init(&writeToDataplane, NULL); 
+    doneWriteP4 = 1;
+
+    pthread_mutex_init(&readFromSimplep4, NULL);
+    doneReadp4Dataplane = 0;
+    
 
     //Set up usercontrolplane
     //funcMap["Write"] = testTemp;
@@ -121,16 +143,15 @@ int controlToData() {
 //Used to transfer data from dataplane to controlplane
 int dataToControl() {
     bool dataIsValid = true;
-    while (true) { //While loop to wake up switchboard whenever there is data needed to be copied to dataplane from contorlplane;
+    while (true) { //While loop to wake up switchboard whenever there is data needed to be copied to controlplane from dataplane
         if (doneWriteDataplane == 0) {
-            //Controlplane writing data to dataplane
             pthread_mutex_lock(&writeToControlplane);
                 //fprintf(stderr, "%s\n", writeDataplaneBuffer);
 
-            /* CHeck if data is indeed valid here, if not then write back to controlplane buffer with an error */
+            /* CHeck if data is indeed valid here, if not then write back to dataplane buffer with an error */
 
             if (dataIsValid) {
-                /* DO Dataplane copying from controlplane data HERE */
+                /* DO Dataplane copying to controlplane data HERE */
                 std::cout << "COPYING BUFFER DATA TO CONTROLPLANE\n";
 
                 if (!(verifyBufferNotNull(writeControlplaneBuffer))) {
@@ -140,7 +161,7 @@ int dataToControl() {
                 /* Test Copying */
                 memcpy(readDataplaneBuffer, writeControlplaneBuffer, BUFFERSIZE);
 
-                pthread_mutex_unlock(&readFromDataplane); //Unlock to let know dataplane that it has to read
+                pthread_mutex_unlock(&readFromDataplane); //Unlock to let know controlplane that it has to read
                 while(doneReadControlplane == 0);
                 pthread_mutex_lock(&readFromDataplane);
                 doneReadControlplane = 0;                   
@@ -159,7 +180,38 @@ int dataToControl() {
 
 //Used to transfer data from simplep4 runtime to dataplane
 int simplep4ToData() {
+    bool dataIsValid = true;
+    while (true) { //While loop to wake up switchboard when p4 writes data
+        if (doneWriteP4 == 0) {
+            pthread_mutex_lock(&writeToDataplane);
+                //fprintf(stderr, "%s\n", writeDataplaneBuffer);
 
+            /* CHeck if data is indeed valid here, if not then write back and error */
+
+            if (dataIsValid) {
+                /* DO copying HERE */
+                std::cout << "COPYING BUFFER DATA TO DATAPLANE FROM P4\n";
+
+                if (!(verifyBufferNotNull(writeDataplaneP4Buffer))) {
+                    exit(1);
+                }
+
+                /* Test Copying */
+                memcpy(readP4Buffer, writeDataplaneP4Buffer, BUFFERSIZE);
+
+                pthread_mutex_unlock(&readFromSimplep4); //Unlock to let know dataplane that it has to read
+                while(doneReadp4Dataplane == 0);
+                pthread_mutex_lock(&readFromSimplep4);
+                doneReadp4Dataplane = 0;                   
+            }
+
+
+            pthread_mutex_unlock(&writeToDataplane);
+            doneWriteP4 = 1;
+            usleep(1);
+        }
+        // std::cout << "Done\n";
+    }
     return 1;
 }
 

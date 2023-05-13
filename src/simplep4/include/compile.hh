@@ -3,6 +3,18 @@
 //Header file for compiling simplep4 program
 
 
+pthread_mutex_t writeToDataplane; //Mutex lock to wake up switchboard to copy data from p4 to dataplane
+int doneWriteP4;
+
+char writeDataplaneP4Buffer[BUFFERSIZE];
+
+char * testString4 = "Hola! This is a message from p4 to the dataplane!\n";
+
+int compileInit();
+int compileMain();
+int writeToDataplaneFromP4(char *, int);
+int compileTest();
+
 
 
 //Protocols

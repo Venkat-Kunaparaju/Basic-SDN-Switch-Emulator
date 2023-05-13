@@ -1,6 +1,6 @@
 #include <../../../include/basic.hh>
 
-#define NUMTHREADSDP 1
+#define NUMTHREADSDP 2
 
 pthread_mutex_t readFromControlplane; //Mutex lock to wake dataplane up if data needs to be updated
 int doneDataplane; //Communicates when dataplane is done populating
@@ -13,6 +13,7 @@ int doneReadp4Dataplane;
 
 char readControlplaneBuffer[BUFFERSIZE]; //Buffer to read info from controlplane
 char writeControlplaneBuffer[BUFFERSIZE]; //Buffer to write infrom to controlplane
+char readP4Buffer[BUFFERSIZE]; //Buffer to read info from p4
 
 
 char * testString2 = "Hey! This is a test to write to controlplane from the dataplane\n";
@@ -25,6 +26,7 @@ int dataplaneMain();
 int dataplaneInit();
 int writeDataToControlplane(char *, int);
 int dataplaneTest();
+int readDataFromP4();
 
 
 

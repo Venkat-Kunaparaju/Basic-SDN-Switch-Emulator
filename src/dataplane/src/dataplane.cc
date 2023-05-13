@@ -111,6 +111,26 @@ int writeDataToControlplane(char * data, int size) {
     return 1;
 }
 
+//Thread runs this and blocks on data coming in from p4
+int readDataFromP4() {
+    while (true) {
+        if (doneReadp4Dataplane == 0) {
+            pthread_mutex_lock(&readFromSimplep4); //Wake up when there is something to be read
+            //Determine What to run based on data in readFromControlPlane
+
+            /* Read from the buffer */
+            fprintf(stdout, "%s", readP4Buffer);
+
+            //population();
+            pthread_mutex_unlock(&readFromSimplep4); 
+            doneReadp4Dataplane = 1; //Indicate done
+            usleep(1);
+        }
+
+    }
+    return 1;
+}
+
 /*
 Used to update dataplane configuration based on specified changes in simplep4 program
 Check for valid data done in compiler
@@ -132,6 +152,10 @@ int dataplaneInit() {
     pthread_t threads[NUMTHREADSDP];
 #if NUMTHREADSDP == 1
     pthread_create(&threads[0], NULL, (void * (*)(void *))dispatcherDataplane, (void *)1);
+#endif
+#if NUMTHREADSDP == 2
+    pthread_create(&threads[0], NULL, (void * (*)(void *))dispatcherDataplane, (void *)1);
+    pthread_create(&threads[1], NULL, (void * (*)(void *))readDataFromP4, (void *)1);
 #endif
     return 1;
 }
