@@ -3,7 +3,7 @@
 
 //Function for testing implementation
 int testUsercontrol() {
-    writeFuncMap["Write"](testString3, BUFFERSIZE);
+    control.writeFuncMap["Write"](testString3, BUFFERSIZE);
     return 1;
 }
 
@@ -18,7 +18,7 @@ int missFunc() {
 
 //Used to register functions
 int regFunctions() {
-    userFuncMap["Miss"] = missFunc;
+    control.funcMap["Miss"] = missFunc;
 
     return 1;
 }

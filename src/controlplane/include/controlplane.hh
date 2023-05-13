@@ -26,12 +26,9 @@ int initFunctions();
 int verifyFunctions();
 
 
-/* User controlplane resources */
-std::map<std::string, int(*)()> userFuncMap; //Map user defined functions; Used by user
-std::map<std::string, int(*)(char *, int)> writeFuncMap; //Map write controlplane functions; Used by controlplane
 
-std::vector<std::string> userFuncs;
-std::vector<std::string> controlFuncs;
+struct ctrl control;
+
 
 /* Type
 Miss -> 1

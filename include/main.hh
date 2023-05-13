@@ -25,6 +25,7 @@ extern char writeControlplaneBuffer[BUFFERSIZE]; //Used by dataplane
 extern char writeDataplaneBuffer[BUFFERSIZE]; //Used by controlplane
 extern char readDataplaneBuffer[BUFFERSIZE]; //Used by controlplane
 
+extern struct ctrl control; //Used for interface between user and control plane
 
 /* Switchboard functions */
 int dummyFunc();

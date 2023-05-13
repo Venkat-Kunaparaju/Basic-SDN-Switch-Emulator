@@ -10,4 +10,12 @@
 
 #define BUFFERSIZE 4906
 
+/* User and control plane resources */
+struct ctrl {
+    std::map<std::string, int(*)()> funcMap; //Map user defined functions; Used by user
+    std::map<std::string, int(*)(char *, int)> writeFuncMap; //Map write controlplane functions; Used by controlplane
+    std::vector<std::string> userFuncs;
+    std::vector<std::string> controlFuncs;
+};
+
 
