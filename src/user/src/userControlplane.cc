@@ -7,6 +7,7 @@ int testUsercontrol() {
     return 1;
 }
 
+//Miss function that user registered
 int missFunc() {
     std::cout << "MISSS\n";
     testUsercontrol();
@@ -22,7 +23,7 @@ int regFunctions() {
     return 1;
 }
 
-//Main function that user has to specifiy 
+//Main function that user needs to have an specify functions to register
 int controlMain() {
     regFunctions();
 

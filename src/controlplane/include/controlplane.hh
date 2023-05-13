@@ -12,7 +12,9 @@ char writeDataplaneBuffer[BUFFERSIZE]; //Buffer for information to send to datap
 char readDataplaneBuffer[BUFFERSIZE]; //Buffer to read infromation from the dataplane
 
 char * testString1 = "Hello! This is a test to write to dataplane from the controlplane\n";
-char * testString3 = "HI! This is a test from user controlplane to dataplane!\n";
+char * testString3 = "HI! This is a test from user controlplane to dataplane\n";
+
+char * errorMessageFunction = "Error: Function registering issue!\n";
 
 
 int controlInit();
@@ -21,11 +23,15 @@ int controlTest();
 int controlplaneMain();
 int dispatcherControlplane();
 int initFunctions();
+int verifyFunctions();
 
 
 /* User controlplane resources */
 std::map<std::string, int(*)()> userFuncMap; //Map user defined functions; Used by user
 std::map<std::string, int(*)(char *, int)> writeFuncMap; //Map write controlplane functions; Used by controlplane
+
+std::vector<std::string> userFuncs;
+std::vector<std::string> controlFuncs;
 
 /* Type
 Miss -> 1

@@ -8,8 +8,9 @@ extern char * testString3;
 
 int controlMain(); //Main function called by switchboard
 
-
-int testUsercontrol();
-
 extern std::map<std::string, int(*)()> userFuncMap; 
 extern std::map<std::string, int(*)(char *, int)> writeFuncMap;
+
+
+/* Functions that can change; Used by and defined by user */
+int testUserControl();

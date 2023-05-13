@@ -1,5 +1,3 @@
-
-#include <vector>
 #include <../../../include/basic.hh>
 
 #define NUMTHREADSDP 1

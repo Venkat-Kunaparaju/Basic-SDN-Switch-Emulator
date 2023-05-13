@@ -10,7 +10,32 @@ int testTemp() {
 
 //Init for establishing functions for interfacing
 int initFunctions() {
+    userFuncs.push_back("Miss");
+    controlFuncs.push_back("Write");
+
+    /* Register control functions */
     writeFuncMap["Write"] = writeDataToDataplane;
+
+    verifyFunctions();
+    return 1;
+}
+
+//Verifies that all functions are registered, both user and controlplane
+int verifyFunctions() {
+    //Make sure that all fucnctions that need to be defined are defined
+    for (int i = 0; i < userFuncs.size(); i++) {
+        if (userFuncMap[userFuncs[i]] == NULL) {
+            std::cerr <<  errorMessageFunction;
+            exit(1);
+        }
+    }
+    for (int i = 0; i < controlFuncs.size(); i++) {
+        if (writeFuncMap[controlFuncs[i]] == NULL) {
+            std::cerr <<  errorMessageFunction;
+            exit(1);
+        }
+    }
+
     return 1;
 }
 
@@ -65,7 +90,7 @@ int controlTest() {
 
     /* Write data to buffer here */
     /* Test data to write to buffer */
-    userFuncMap["Miss"]();
+        userFuncMap["Miss"]();
     //funcMap["Write"]();
     //writeDataToDataplane(testString1, BUFFERSIZE);
 
