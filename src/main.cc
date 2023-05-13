@@ -21,6 +21,7 @@ int verifyBufferNotNull(char * buf) {
 }
 
 
+
 //Initialize threads to handle each component
 int threadinit() {
     pthread_t threads[NUMTHREAD];
@@ -94,6 +95,8 @@ int init() {
 
     pthread_mutex_init(&readFromSimplep4, NULL);
     doneReadp4Dataplane = 0;
+
+    pthread_mutex_lock(&readFromSimplep4);
     
 
     //Set up usercontrolplane
