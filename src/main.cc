@@ -3,10 +3,23 @@
 //Make multiple threads, each to handle the different component of the application
 //Makes dealing with shared resources muche easier
 
+
+//Dummy function just for random testing
 int dummyFunc() {
     std::cout << "NOTHING!\n";
     return 1;
 }
+
+
+//Returns 1 if buffer is not null, 0 if it is
+int verifyBufferNotNull(char * buf) {
+    if (buf == NULL || buf == '\0') {
+        std::cerr << "NULL or empty buffer detected!\n";
+        return 0;
+    }
+    return 1;
+}
+
 
 //Initialize threads to handle each component
 int threadinit() {
@@ -35,8 +48,6 @@ int threadinit() {
     for (int i = 0; i < NUMTHREAD; i++) {
         pthread_create(&interThreads[i], NULL, (void * (*)(void *))interThreadFuncs[i], NULL);
     }
-
-
 #endif
     return 1;
 }
@@ -69,6 +80,7 @@ int init() {
     return 1;
 }
 
+//Used to transfer data from control to data plane
 int controlToData() {
     bool dataIsValid = true;
     while (true) { //While loop to wake up switchboard whenever there is data needed to be copied to dataplane from contorlplane;
@@ -82,6 +94,10 @@ int controlToData() {
             if (dataIsValid) {
                 /* DO Dataplane copying from controlplane data HERE */
                 std::cout << "COPYING BUFFER DATA TO DATAPLANE\n";
+
+                if (!(verifyBufferNotNull(writeDataplaneBuffer))) {
+                    exit(1);
+                }
 
                 /* Test Copying */
                 memcpy(readControlplaneBuffer, writeDataplaneBuffer, BUFFERSIZE);
@@ -102,6 +118,7 @@ int controlToData() {
     return 1;
 }
 
+//Used to transfer data from dataplane to controlplane
 int dataToControl() {
     bool dataIsValid = true;
     while (true) { //While loop to wake up switchboard whenever there is data needed to be copied to dataplane from contorlplane;
@@ -115,6 +132,10 @@ int dataToControl() {
             if (dataIsValid) {
                 /* DO Dataplane copying from controlplane data HERE */
                 std::cout << "COPYING BUFFER DATA TO CONTROLPLANE\n";
+
+                if (!(verifyBufferNotNull(writeControlplaneBuffer))) {
+                    exit(1);
+                }
 
                 /* Test Copying */
                 memcpy(readDataplaneBuffer, writeControlplaneBuffer, BUFFERSIZE);
@@ -135,6 +156,8 @@ int dataToControl() {
     return 1;
 }
 
+
+//Used to transfer data from simplep4 runtime to dataplane
 int simplep4ToData() {
 
     return 1;

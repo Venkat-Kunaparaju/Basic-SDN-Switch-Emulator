@@ -18,4 +18,4 @@ struct ctrl {
     std::vector<std::string> controlFuncs;
 };
 
-
+int verifyBufferNotNull(char *);
