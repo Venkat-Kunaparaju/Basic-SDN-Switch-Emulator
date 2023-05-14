@@ -12,7 +12,7 @@ char * testString4 = "Hola! This is a message from p4 to the dataplane!\n";
 
 int compileInit();
 int compileMain();
-int writeToDataplaneFromP4(char *, int);
+int writeToDataplaneFromP4(char * buffer, int size);
 int compileTest();
 
 

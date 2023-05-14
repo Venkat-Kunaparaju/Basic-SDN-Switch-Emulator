@@ -24,7 +24,7 @@ int population();
 int startUp();
 int dataplaneMain();
 int dataplaneInit();
-int writeDataToControlplane(char *, int);
+int writeDataToControlplane(char * buffer, int size);
 int dataplaneTest();
 int readDataFromP4();
 

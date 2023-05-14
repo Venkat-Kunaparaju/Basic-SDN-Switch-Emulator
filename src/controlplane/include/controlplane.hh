@@ -18,7 +18,7 @@ char * errorMessageFunction = "Error: Function registering issue!\n";
 
 
 int controlInit();
-int writeDataToDataplane(char *, int);
+int writeDataToDataplane(char * buffer, int size);
 int controlTest();
 int controlplaneMain();
 int dispatcherControlplane();
