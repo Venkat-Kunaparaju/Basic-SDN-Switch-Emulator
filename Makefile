@@ -4,12 +4,12 @@ user = src/user/src/userControlplane.cc
 comp = src/simplep4/src/compile.cc
 
 CCo = g++ -I include -o
+CCc = g++ -c
 
 DCCc = g++ -I src/dataplane/include -c $(d) -o 
 CCCc = g++ -I src/controlplane/include -c $(cont) -o
 UCCc = g++ -I src/user/include -c $(user) -o
 PCCc = g++ -I src/simplep4/include -c $(comp) -o
-
 
 
 WARNINGS = -Wno-deprecated
