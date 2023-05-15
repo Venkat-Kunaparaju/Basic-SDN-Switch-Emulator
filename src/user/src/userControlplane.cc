@@ -1,4 +1,5 @@
 #include <control.hh>
+#include <user.hh>
 /* Everything is up to user implemenation. Contorlmain() is the only thing called by controlplane */
 
 //Function for testing implementation
