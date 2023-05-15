@@ -1,8 +1,17 @@
+d = src/dataplane/src/dataplane.cc
+cont = src/controlplane/src/controlplane.cc
+user = src/user/src/userControlplane.cc
+comp = src/simplep4/src/compile.cc
+
 CCo = g++ -I include -o
-DCCc = g++ -I src/dataplane/include -c
-CCCc = g++ -I src/controlplane/include -c
-UCCc = g++ -I src/user/include -c
-PCCc = g++ -I src/simplep4/include -c
+
+DCCc = g++ -I src/dataplane/include -c $(d) -o 
+CCCc = g++ -I src/controlplane/include -c $(cont) -o
+UCCc = g++ -I src/user/include -c $(user) -o
+PCCc = g++ -I src/simplep4/include -c $(comp) -o
+
+
+
 WARNINGS = -Wno-deprecated
 LEX = lex -l -o
 YACC = yacc -d -o
@@ -10,27 +19,24 @@ YACC = yacc -d -o
 
 all: main
 
-main: src/dataplane/src/dataplane.cc src/controlplane/src/controlplane.cc src/main.cc dataplane controlplane userControlplane compile
-	$(CCo) bin/main src/main.cc dataplane.o controlplane.o userControlplane.o compile.o
+main: clean directory src/dataplane/src/dataplane.cc src/controlplane/src/controlplane.cc src/main.cc dataplane controlplane userControlplane compile
+	$(CCo) bin/main src/main.cc bin/dataplane.o bin/controlplane.o bin/userControlplane.o bin/compile.o
 
-dataplane: src/dataplane/src/dataplane.cc
-	$(DCCc) src/dataplane/src/dataplane.cc
+dataplane: $(d)
+	$(DCCc) bin/dataplane.o
 
-controlplane: src/controlplane/src/controlplane.cc
-	$(CCCc) src/controlplane/src/controlplane.cc 
+controlplane: $(cont)
+	$(CCCc) bin/controlplane.o
 
-userControlplane: src/user/src/userControlplane.cc 
-	$(UCCc) src/user/src/userControlplane.cc 
+userControlplane: $(user)
+	$(UCCc) bin/userControlplane.o
 
-compile: src/simplep4/src/compile.cc
-	$(PCCc) src/simplep4/src/compile.cc
+compile: $(comp)
+	$(PCCc) bin/compile.o
 
+directory:
+	mkdir bin
 
-	
 clean:
-	rm -f main
-	rm -f dataplane.o
-	rm -f controlplane.o
-	rm -f userControlplane.o
-	rm -f compile.o
+	rm -r bin
 
