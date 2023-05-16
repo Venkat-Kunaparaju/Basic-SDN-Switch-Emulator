@@ -23,8 +23,8 @@ YACC = yacc -d -o
 
 all: main
 
-main: clean directory src/dataplane/src/dataplane.cc src/controlplane/src/controlplane.cc src/main.cc dataplane controlplane userControlplane compile lex yacc
-	$(CCo) bin/main src/main.cc bin/dataplane.o bin/controlplane.o bin/userControlplane.o bin/compile.o bin/lex.o bin/yacc.o
+main: clean directory src/dataplane/src/dataplane.cc src/controlplane/src/controlplane.cc src/main.cc dataplane controlplane userControlplane compile yacc lex
+	$(CCo) bin/main src/main.cc bin/dataplane.o bin/controlplane.o bin/userControlplane.o bin/compile.o bin/yacc.o bin/lex.o 
 
 dataplane: $(d)
 	$(DCCc) bin/dataplane.o
@@ -44,7 +44,7 @@ lex: $(l)
 
 yacc: $(y)
 	$(YACC) build/y.tab.cc $(y)
-	$(LCCc) y.tab.cc -o bin/yacc.o
+	$(LCCc) build/y.tab.cc -o bin/yacc.o
 
 
 directory:

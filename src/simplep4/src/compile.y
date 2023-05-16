@@ -1,5 +1,5 @@
 %{
-  //#include <compile.h>
+  #include <../../../include/basic.hh>
 
   // Declare stuff from Flex that Bison needs to know about:
   extern int yylex();
@@ -8,10 +8,14 @@
   void yyerror(const char *s);
 %}
 
+%token TEST
+
 %%
-whereList:
-    whereList
-    ;
+goal:
+  TEST {
+      printf("HELLO");
+  }
+  ;
 %%
 
 

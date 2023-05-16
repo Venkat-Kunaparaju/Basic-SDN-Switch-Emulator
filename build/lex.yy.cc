@@ -383,8 +383,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	(yy_more_offset) = 0; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 1
-#define YY_END_OF_BUFFER 2
+#define YY_NUM_RULES 2
+#define YY_END_OF_BUFFER 3
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -392,14 +392,14 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_acclist[3] =
+static yyconst flex_int16_t yy_acclist[5] =
     {   0,
-        2,    1
+        3,    2,    1,    2
     } ;
 
-static yyconst flex_int16_t yy_accept[7] =
+static yyconst flex_int16_t yy_accept[8] =
     {   0,
-        1,    1,    1,    2,    3,    3
+        1,    1,    1,    2,    3,    5,    5
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
@@ -410,9 +410,9 @@ static yyconst flex_int32_t yy_ec[256] =
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    1,    1,    1,    1,    1,    1,    2,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
-        1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
+        1,    1,    2,    2,    1,    1,    1,    1,    1,    1,
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
 
         1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -434,35 +434,35 @@ static yyconst flex_int32_t yy_ec[256] =
         1,    1,    1,    1,    1
     } ;
 
-static yyconst flex_int32_t yy_meta[2] =
+static yyconst flex_int32_t yy_meta[3] =
     {   0,
-        1
+        1,    1
     } ;
 
 static yyconst flex_int16_t yy_base[7] =
     {   0,
-        0,    0,    2,    3,    3,    0
+        0,    0,    3,    4,    4,    4
     } ;
 
 static yyconst flex_int16_t yy_def[7] =
     {   0,
-        6,    6,    5,    5,    0,    5
+        6,    1,    6,    6,    6,    0
     } ;
 
-static yyconst flex_int16_t yy_nxt[5] =
+static yyconst flex_int16_t yy_nxt[7] =
     {   0,
-        4,    5,    3,    5
+        4,    5,    6,    3,    6,    6
     } ;
 
-static yyconst flex_int16_t yy_chk[5] =
+static yyconst flex_int16_t yy_chk[7] =
     {   0,
-        6,    3,    5,    5
+        1,    1,    3,    6,    6,    6
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static yyconst flex_int32_t yy_rule_can_match_eol[2] =
+static yyconst flex_int32_t yy_rule_can_match_eol[3] =
     {   0,
-0,     };
+0, 0,     };
 
 extern int yy_flex_debug;
 int yy_flex_debug = 0;
@@ -497,10 +497,11 @@ char *yytext_ptr;
 #line 1 "src/simplep4/src/compile.l"
 #line 2 "src/simplep4/src/compile.l"
   //#include <compile.hh>
+  #include <iostream>
   #include <y.tab.hh>
   extern int yylex();
 
-#line 504 "build/lex.yy.cc"
+#line 505 "build/lex.yy.cc"
 
 #define INITIAL 0
 
@@ -682,8 +683,7 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 8 "src/simplep4/src/compile.l"
-
+#line 9 "src/simplep4/src/compile.l"
 
 
 #line 690 "build/lex.yy.cc"
@@ -744,14 +744,14 @@ yy_match:
 			while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 				{
 				yy_current_state = (int) yy_def[yy_current_state];
-				if ( yy_current_state >= 6 )
+				if ( yy_current_state >= 7 )
 					yy_c = yy_meta[(unsigned int) yy_c];
 				}
 			yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
 			*(yy_state_ptr)++ = yy_current_state;
 			++yy_cp;
 			}
-		while ( yy_base[yy_current_state] != 3 );
+		while ( yy_base[yy_current_state] != 4 );
 
 yy_find_action:
 		yy_current_state = *--(yy_state_ptr);
@@ -792,9 +792,16 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 11 "src/simplep4/src/compile.l"
+{
+  return TEST;
+}
+	YY_BREAK
+case 2:
+YY_RULE_SETUP
+#line 15 "src/simplep4/src/compile.l"
 ECHO;
 	YY_BREAK
-#line 798 "build/lex.yy.cc"
+#line 805 "build/lex.yy.cc"
 			case YY_STATE_EOF(INITIAL):
 				yyterminate();
 
@@ -1055,7 +1062,7 @@ static int yy_get_next_buffer (void)
 		while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 			{
 			yy_current_state = (int) yy_def[yy_current_state];
-			if ( yy_current_state >= 6 )
+			if ( yy_current_state >= 7 )
 				yy_c = yy_meta[(unsigned int) yy_c];
 			}
 		yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
@@ -1078,11 +1085,11 @@ static int yy_get_next_buffer (void)
 	while ( yy_chk[yy_base[yy_current_state] + yy_c] != yy_current_state )
 		{
 		yy_current_state = (int) yy_def[yy_current_state];
-		if ( yy_current_state >= 6 )
+		if ( yy_current_state >= 7 )
 			yy_c = yy_meta[(unsigned int) yy_c];
 		}
 	yy_current_state = yy_nxt[yy_base[yy_current_state] + (unsigned int) yy_c];
-	yy_is_jam = (yy_current_state == 5);
+	yy_is_jam = (yy_current_state == 6);
 	if ( ! yy_is_jam )
 		*(yy_state_ptr)++ = yy_current_state;
 
@@ -1777,6 +1784,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 11 "src/simplep4/src/compile.l"
+#line 15 "src/simplep4/src/compile.l"
 
 
