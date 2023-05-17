@@ -67,14 +67,26 @@
       know about them.  */
    enum yytokentype {
      NOMATCH = 258,
-     TEST = 259,
-     CHECK = 260
+     HEADER = 259,
+     BIT = 260,
+     CURLYOPEN = 261,
+     CURLYCLOSE = 262,
+     OPENARROW = 263,
+     CLOSEARROW = 264,
+     INT = 265,
+     VARIABLE = 266
    };
 #endif
 /* Tokens.  */
 #define NOMATCH 258
-#define TEST 259
-#define CHECK 260
+#define HEADER 259
+#define BIT 260
+#define CURLYOPEN 261
+#define CURLYCLOSE 262
+#define OPENARROW 263
+#define CLOSEARROW 264
+#define INT 265
+#define VARIABLE 266
 
 
 
@@ -118,7 +130,7 @@ typedef union YYSTYPE
     char stringVal[32];
 }
 /* Line 193 of yacc.c.  */
-#line 122 "build/y.tab.cc"
+#line 134 "build/y.tab.cc"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -131,7 +143,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 135 "build/y.tab.cc"
+#line 147 "build/y.tab.cc"
 
 #ifdef short
 # undef short
@@ -344,22 +356,22 @@ union yyalloc
 #endif
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  7
+#define YYFINAL  5
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   4
+#define YYLAST   2
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  6
+#define YYNTOKENS  12
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  4
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  7
+#define YYNRULES  6
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  9
+#define YYNSTATES  7
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   260
+#define YYMAXUTOK   266
 
 #define YYTRANSLATE(YYX)						\
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -393,7 +405,7 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5
+       5,     6,     7,     8,     9,    10,    11
 };
 
 #if YYDEBUG
@@ -401,20 +413,20 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint8 yyprhs[] =
 {
-       0,     0,     3,     5,     8,    10,    12,    14
+       0,     0,     3,     5,     8,    10,    11
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-       7,     0,    -1,     8,    -1,     8,     9,    -1,     9,    -1,
-       4,    -1,     5,    -1,     3,    -1
+      13,     0,    -1,    14,    -1,    14,    15,    -1,    15,    -1,
+      -1,     3,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    22,    22,    25,    26,    29,    32,    35
+       0,    24,    24,    27,    28,    30,    31
 };
 #endif
 
@@ -423,7 +435,8 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "NOMATCH", "TEST", "CHECK", "$accept",
+  "$end", "error", "$undefined", "NOMATCH", "HEADER", "BIT", "CURLYOPEN",
+  "CURLYCLOSE", "OPENARROW", "CLOSEARROW", "INT", "VARIABLE", "$accept",
   "goals", "lines", "line", 0
 };
 #endif
@@ -433,20 +446,21 @@ static const char *const yytname[] =
    token YYLEX-NUM.  */
 static const yytype_uint16 yytoknum[] =
 {
-       0,   256,   257,   258,   259,   260
+       0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
+     265,   266
 };
 # endif
 
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,     6,     7,     8,     8,     9,     9,     9
+       0,    12,    13,    14,    14,    15,    15
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     1,     2,     1,     1,     1,     1
+       0,     2,     1,     2,     1,     0,     1
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -454,13 +468,13 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     7,     5,     6,     0,     2,     4,     1,     3
+       5,     6,     0,     2,     4,     1,     3
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     4,     5,     6
+      -1,     2,     3,     4
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
@@ -468,7 +482,7 @@ static const yytype_int8 yydefgoto[] =
 #define YYPACT_NINF -4
 static const yytype_int8 yypact[] =
 {
-      -3,    -4,    -4,    -4,     3,    -3,    -4,    -4,    -4
+      -3,    -4,     1,    -3,    -4,    -4,    -4
 };
 
 /* YYPGOTO[NTERM-NUM].  */
@@ -484,19 +498,19 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-       1,     2,     3,     7,     8
+       1,     5,     6
 };
 
 static const yytype_uint8 yycheck[] =
 {
-       3,     4,     5,     0,     5
+       3,     0,     3
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     3,     4,     5,     7,     8,     9,     0,     9
+       0,     3,    13,    14,    15,     0,    15
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1310,24 +1324,10 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 5:
-#line 29 "src/simplep4/src/compile.y"
+        case 6:
+#line 31 "src/simplep4/src/compile.y"
     {
-      std::cerr << "Recieved Test\n";
-  }
-    break;
-
-  case 6:
-#line 32 "src/simplep4/src/compile.y"
-    {
-      std::cerr << "Recieved Check\n";
-  }
-    break;
-
-  case 7:
-#line 35 "src/simplep4/src/compile.y"
-    {
-      fprintf(stderr, "Nomatch string: %s\n", (yyvsp[(1) - (1)].stringVal));
+      fprintf(stderr, "Nomatch string found: %s\n", (yyvsp[(1) - (1)].stringVal));
   }
     break;
 
@@ -1547,7 +1547,7 @@ yyreturn:
 }
 
 
-#line 39 "src/simplep4/src/compile.y"
+#line 35 "src/simplep4/src/compile.y"
 
 
 

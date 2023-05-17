@@ -40,14 +40,26 @@
       know about them.  */
    enum yytokentype {
      NOMATCH = 258,
-     TEST = 259,
-     CHECK = 260
+     HEADER = 259,
+     BIT = 260,
+     CURLYOPEN = 261,
+     CURLYCLOSE = 262,
+     OPENARROW = 263,
+     CLOSEARROW = 264,
+     INT = 265,
+     VARIABLE = 266
    };
 #endif
 /* Tokens.  */
 #define NOMATCH 258
-#define TEST 259
-#define CHECK 260
+#define HEADER 259
+#define BIT 260
+#define CURLYOPEN 261
+#define CURLYCLOSE 262
+#define OPENARROW 263
+#define CLOSEARROW 264
+#define INT 265
+#define VARIABLE 266
 
 
 
@@ -61,7 +73,7 @@ typedef union YYSTYPE
     char stringVal[32];
 }
 /* Line 1529 of yacc.c.  */
-#line 65 "build/y.tab.hh"
+#line 77 "build/y.tab.hh"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1

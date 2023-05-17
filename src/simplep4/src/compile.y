@@ -14,8 +14,10 @@
     char stringVal[32];
 }
 
-%token <stringVal> NOMATCH
-%token TEST CHECK
+%token <stringVal> NOMATCH VARIABLE
+%token <intVal> INT
+%token HEADER BIT
+%token CURLYOPEN CURLYCLOSE OPENARROW CLOSEARROW SEMICOLON
 
 %%
 goals:
@@ -26,14 +28,8 @@ lines:
   | line
   ;
 line: 
-  TEST {
-      std::cerr << "Recieved Test\n";
-  }
-  | CHECK {
-      std::cerr << "Recieved Check\n";
-  }
   | NOMATCH {
-      fprintf(stderr, "Nomatch string: %s\n", $1);
+      fprintf(stderr, "Nomatch string found: %s\n", $1);
   }
   ;
 %%

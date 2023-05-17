@@ -11,16 +11,46 @@
   //Ignore space and tabs and newline
 }
 
-[Tt][Ee][Ss][Tt] {
-  //fprintf(stderr, "The string is: %s\n", yytext);
-  return TEST;
+"header" {
+  return HEADER;
 }
 
-[Cc][Hh][Ee][Cc][Kk] {
-  return CHECK;
+"bit" {
+  return BIT;
 }
 
-(.*) {
+"{" {
+  return CURLYOPEN;
+}
+
+"}" {
+  return CURLYCLOSE;
+}
+
+"<" {
+  return OPENARROW;
+}
+
+">" {
+  return CLOSEARROW;
+}
+
+";" {
+  return SEMICOLON;
+}
+
+[0-9]+ { //Matches with a sequence of numbers
+  yylval.intVal = atoi(yytext);
+  return INT;
+}
+
+[^ \(\)"\n\t;,]+ { //Everything that a variable can not have in it
+  memcpy(yylval.stringVal, yytext, 32);
+  return VARIABLE;
+}
+
+
+(.*) { //Matches with anything
   memcpy(yylval.stringVal, yytext, 32);
   return NOMATCH;
 }
