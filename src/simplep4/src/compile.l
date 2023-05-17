@@ -11,12 +11,44 @@
   //Ignore space and tabs and newline
 }
 
-"header" {
+"Header" {
   return HEADER;
 }
 
 "bit" {
   return BIT;
+}
+
+"Ingress" {
+  return INGRESS;
+}
+
+"Egress" {
+  return EGRESS;
+}
+
+"tables" {
+  return TABLES;
+}
+
+"exact" {
+  return EXACT;
+}
+
+"could" {
+  return COULD;
+}
+
+"actions" {
+  return ACTIONS;
+}
+
+"maxNumEntries" {
+  return MAXNUMENTRIES;
+}
+
+"defaultAcion" {
+  return DEFAULTACTION;
 }
 
 "{" {
@@ -39,9 +71,8 @@
   return SEMICOLON;
 }
 
-[0-9]+ { //Matches with a sequence of numbers
-  yylval.intVal = atoi(yytext);
-  return INT;
+"=" {
+  return EQUAL;
 }
 
 [^ \(\)"\n\t;,]+ { //Everything that a variable can not have in it
@@ -49,6 +80,10 @@
   return VARIABLE;
 }
 
+[0-9]+ { //Matches with a sequence of numbers
+  yylval.intVal = atoi(yytext);
+  return INT;
+}
 
 (.*) { //Matches with anything
   memcpy(yylval.stringVal, yytext, 32);

@@ -16,20 +16,20 @@
 
 %token <stringVal> NOMATCH VARIABLE
 %token <intVal> INT
-%token HEADER BIT
-%token CURLYOPEN CURLYCLOSE OPENARROW CLOSEARROW SEMICOLON
+%token HEADER BIT INGRESS EGRESS TABLES EXACT COULD ACTIONS MAXNUMENTRIES DEFAULTACTION
+%token CURLYOPEN CURLYCLOSE OPENARROW CLOSEARROW SEMICOLON EQUAL
 
 %%
 goals:
-  lines
+  | lines
   ;
 lines:
-  lines line
+  | lines line
   | line
   ;
 line: 
-  | NOMATCH {
-      fprintf(stderr, "Nomatch string found: %s\n", $1);
+  | VARIABLE {
+      fprintf(stderr, "Variable found: %s\n", $1);
   }
   ;
 %%

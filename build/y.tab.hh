@@ -40,26 +40,46 @@
       know about them.  */
    enum yytokentype {
      NOMATCH = 258,
-     HEADER = 259,
-     BIT = 260,
-     CURLYOPEN = 261,
-     CURLYCLOSE = 262,
-     OPENARROW = 263,
-     CLOSEARROW = 264,
-     INT = 265,
-     VARIABLE = 266
+     VARIABLE = 259,
+     INT = 260,
+     HEADER = 261,
+     BIT = 262,
+     INGRESS = 263,
+     EGRESS = 264,
+     TABLES = 265,
+     EXACT = 266,
+     COULD = 267,
+     ACTIONS = 268,
+     MAXNUMENTRIES = 269,
+     DEFAULTACTION = 270,
+     CURLYOPEN = 271,
+     CURLYCLOSE = 272,
+     OPENARROW = 273,
+     CLOSEARROW = 274,
+     SEMICOLON = 275,
+     EQUAL = 276
    };
 #endif
 /* Tokens.  */
 #define NOMATCH 258
-#define HEADER 259
-#define BIT 260
-#define CURLYOPEN 261
-#define CURLYCLOSE 262
-#define OPENARROW 263
-#define CLOSEARROW 264
-#define INT 265
-#define VARIABLE 266
+#define VARIABLE 259
+#define INT 260
+#define HEADER 261
+#define BIT 262
+#define INGRESS 263
+#define EGRESS 264
+#define TABLES 265
+#define EXACT 266
+#define COULD 267
+#define ACTIONS 268
+#define MAXNUMENTRIES 269
+#define DEFAULTACTION 270
+#define CURLYOPEN 271
+#define CURLYCLOSE 272
+#define OPENARROW 273
+#define CLOSEARROW 274
+#define SEMICOLON 275
+#define EQUAL 276
 
 
 
@@ -73,7 +93,7 @@ typedef union YYSTYPE
     char stringVal[32];
 }
 /* Line 1529 of yacc.c.  */
-#line 77 "build/y.tab.hh"
+#line 97 "build/y.tab.hh"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
