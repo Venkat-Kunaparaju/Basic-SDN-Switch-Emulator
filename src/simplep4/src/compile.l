@@ -47,7 +47,7 @@
   return MAXNUMENTRIES;
 }
 
-"defaultAcion" {
+"defaultAction" {
   return DEFAULTACTION;
 }
 
@@ -75,19 +75,14 @@
   return EQUAL;
 }
 
-[^ \(\)"\n\t;,]+ { //Everything that a variable can not have in it
-  memcpy(yylval.stringVal, yytext, 32);
-  return VARIABLE;
-}
-
 [0-9]+ { //Matches with a sequence of numbers
   yylval.intVal = atoi(yytext);
   return INT;
 }
 
-(.*) { //Matches with anything
+[^ <>\(\)"\n\t;,]+ { //Everything that a variable can not have in it
   memcpy(yylval.stringVal, yytext, 32);
-  return NOMATCH;
+  return VARIABLE;
 }
 
 %%

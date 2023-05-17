@@ -21,15 +21,22 @@
 
 %%
 goals:
-  | lines
+  goals goal
+  | goal
   ;
-lines:
-  | lines line
-  | line
-  ;
-line: 
+goal: 
+  HEADER CURLYOPEN parser CURLYCLOSE //Parse through fields
   | VARIABLE {
       fprintf(stderr, "Variable found: %s\n", $1);
+  }
+  ;
+parser:
+  | parser line
+  | line
+  ;
+line:
+  BIT OPENARROW INT CLOSEARROW VARIABLE SEMICOLON { //Works recursively
+    fprintf(stderr, "Valid bit map\n");
   }
   ;
 %%
