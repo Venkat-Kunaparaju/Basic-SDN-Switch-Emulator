@@ -9,6 +9,7 @@ extern int dataplaneMain(); //Dataplane main
 extern int controlplaneMain(); //Controlplane main
 extern int controlMain(); //Usercontrolplane main
 extern int compileMain(); //Compiler main
+extern int yyparse(); //Yacc parsing
 
 extern pthread_mutex_t writtenToDataplane; //Used by controlplane
 extern int doneControlplane; //Used by controlplane

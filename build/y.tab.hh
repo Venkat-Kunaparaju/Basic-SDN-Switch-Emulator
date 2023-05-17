@@ -39,17 +39,30 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     TEST = 258
+     NOMATCH = 258,
+     TEST = 259,
+     CHECK = 260
    };
 #endif
 /* Tokens.  */
-#define TEST 258
+#define NOMATCH 258
+#define TEST 259
+#define CHECK 260
 
 
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+#line 11 "src/simplep4/src/compile.y"
+{
+    int intVal;
+    double doubleVal;
+    char stringVal[32];
+}
+/* Line 1529 of yacc.c.  */
+#line 65 "build/y.tab.hh"
+	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1

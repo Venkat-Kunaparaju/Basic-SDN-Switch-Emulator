@@ -66,11 +66,15 @@
    /* Put the tokens into the symbol table, so that GDB and other debuggers
       know about them.  */
    enum yytokentype {
-     TEST = 258
+     NOMATCH = 258,
+     TEST = 259,
+     CHECK = 260
    };
 #endif
 /* Tokens.  */
-#define TEST 258
+#define NOMATCH 258
+#define TEST 259
+#define CHECK 260
 
 
 
@@ -106,7 +110,16 @@
 #endif
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+typedef union YYSTYPE
+#line 11 "src/simplep4/src/compile.y"
+{
+    int intVal;
+    double doubleVal;
+    char stringVal[32];
+}
+/* Line 193 of yacc.c.  */
+#line 122 "build/y.tab.cc"
+	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 # define YYSTYPE_IS_TRIVIAL 1
@@ -118,7 +131,7 @@ typedef int YYSTYPE;
 
 
 /* Line 216 of yacc.c.  */
-#line 122 "build/y.tab.cc"
+#line 135 "build/y.tab.cc"
 
 #ifdef short
 # undef short
@@ -331,22 +344,22 @@ union yyalloc
 #endif
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  3
+#define YYFINAL  7
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   1
+#define YYLAST   4
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  4
+#define YYNTOKENS  6
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  2
+#define YYNNTS  4
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  2
+#define YYNRULES  7
 /* YYNRULES -- Number of states.  */
-#define YYNSTATES  4
+#define YYNSTATES  9
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   258
+#define YYMAXUTOK   260
 
 #define YYTRANSLATE(YYX)						\
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -379,7 +392,8 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     1,     2,     3
+       2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
+       5
 };
 
 #if YYDEBUG
@@ -387,19 +401,20 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint8 yyprhs[] =
 {
-       0,     0,     3
+       0,     0,     3,     5,     8,    10,    12,    14
 };
 
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-       5,     0,    -1,     3,    -1
+       7,     0,    -1,     8,    -1,     8,     9,    -1,     9,    -1,
+       4,    -1,     5,    -1,     3,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    15,    15
+       0,    22,    22,    25,    26,    29,    32,    35
 };
 #endif
 
@@ -408,7 +423,8 @@ static const yytype_uint8 yyrline[] =
    First, the terminals, then, starting at YYNTOKENS, nonterminals.  */
 static const char *const yytname[] =
 {
-  "$end", "error", "$undefined", "TEST", "$accept", "goal", 0
+  "$end", "error", "$undefined", "NOMATCH", "TEST", "CHECK", "$accept",
+  "goals", "lines", "line", 0
 };
 #endif
 
@@ -417,20 +433,20 @@ static const char *const yytname[] =
    token YYLEX-NUM.  */
 static const yytype_uint16 yytoknum[] =
 {
-       0,   256,   257,   258
+       0,   256,   257,   258,   259,   260
 };
 # endif
 
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,     4,     5
+       0,     6,     7,     8,     8,     9,     9,     9
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     1
+       0,     2,     1,     2,     1,     1,     1,     1
 };
 
 /* YYDEFACT[STATE-NAME] -- Default rule to reduce with in state
@@ -438,13 +454,13 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     2,     0,     1
+       0,     7,     5,     6,     0,     2,     4,     1,     3
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     2
+      -1,     4,     5,     6
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
@@ -452,13 +468,13 @@ static const yytype_int8 yydefgoto[] =
 #define YYPACT_NINF -4
 static const yytype_int8 yypact[] =
 {
-      -3,    -4,     1,    -4
+      -3,    -4,    -4,    -4,     3,    -3,    -4,    -4,    -4
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -4,    -4
+      -4,    -4,    -4,    -1
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -468,19 +484,19 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-       1,     3
+       1,     2,     3,     7,     8
 };
 
 static const yytype_uint8 yycheck[] =
 {
-       3,     0
+       3,     4,     5,     0,     5
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     3,     5,     0
+       0,     3,     4,     5,     7,     8,     9,     0,     9
 };
 
 #define yyerrok		(yyerrstatus = 0)
@@ -1294,16 +1310,30 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-        case 2:
-#line 15 "src/simplep4/src/compile.y"
+        case 5:
+#line 29 "src/simplep4/src/compile.y"
     {
-      printf("HELLO");
+      std::cerr << "Recieved Test\n";
+  }
+    break;
+
+  case 6:
+#line 32 "src/simplep4/src/compile.y"
+    {
+      std::cerr << "Recieved Check\n";
+  }
+    break;
+
+  case 7:
+#line 35 "src/simplep4/src/compile.y"
+    {
+      fprintf(stderr, "Nomatch string: %s\n", (yyvsp[(1) - (1)].stringVal));
   }
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1307 "build/y.tab.cc"
+#line 1337 "build/y.tab.cc"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1517,10 +1547,11 @@ yyreturn:
 }
 
 
-#line 19 "src/simplep4/src/compile.y"
+#line 39 "src/simplep4/src/compile.y"
 
 
 
 void yyerror(const char *s) {
-    fprintf(stderr, "%s\n", s);
+    fprintf(stderr, "ERROR: %s\n", s);
 }
+

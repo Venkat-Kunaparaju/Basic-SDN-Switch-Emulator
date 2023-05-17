@@ -8,17 +8,37 @@
   void yyerror(const char *s);
 %}
 
-%token TEST
+%union {
+    int intVal;
+    double doubleVal;
+    char stringVal[32];
+}
+
+%token <stringVal> NOMATCH
+%token TEST CHECK
 
 %%
-goal:
+goals:
+  lines
+  ;
+lines:
+  lines line
+  | line
+  ;
+line: 
   TEST {
-      printf("HELLO");
+      std::cerr << "Recieved Test\n";
+  }
+  | CHECK {
+      std::cerr << "Recieved Check\n";
+  }
+  | NOMATCH {
+      fprintf(stderr, "Nomatch string: %s\n", $1);
   }
   ;
 %%
 
 
 void yyerror(const char *s) {
-    fprintf(stderr, "%s\n", s);
+    fprintf(stderr, "ERROR: %s\n", s);
 }

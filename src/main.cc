@@ -226,8 +226,8 @@ int testFunc() {
     // while(doneDataplane == 0);
     // pthread_mutex_lock(&readFromControlplane);
     // doneDataplane = 0;
-    while(true);
-    for (int i = 0; i < 100000000; i++); //Poll for a bit to allow other threads to execute
+    //while(true);
+    //for (int i = 0; i < 100000000; i++); //Poll for a bit to allow other threads to execute
     return 1;
 }
 
@@ -235,6 +235,7 @@ int main() {
     fprintf(stderr, "MAIN\n");
     init();
     threadinit();
-    testFunc();
+    //testFunc();
+    yyparse();
     return 1;
 }
