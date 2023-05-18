@@ -376,9 +376,9 @@ union yyalloc
 #endif
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  6
+#define YYFINAL  7
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   17
+#define YYLAST   18
 
 /* YYNTOKENS -- Number of terminals.  */
 #define YYNTOKENS  22
@@ -434,7 +434,7 @@ static const yytype_uint8 yytranslate[] =
    YYRHS.  */
 static const yytype_uint8 yyprhs[] =
 {
-       0,     0,     3,     6,     8,    13,    15,    16,    19,    21,
+       0,     0,     3,     6,     8,    13,    15,    17,    18,    21,
       23
 };
 
@@ -442,14 +442,14 @@ static const yytype_uint8 yyprhs[] =
 static const yytype_int8 yyrhs[] =
 {
       23,     0,    -1,    23,    24,    -1,    24,    -1,     6,    16,
-      25,    17,    -1,     4,    -1,    -1,    25,    26,    -1,    26,
-      -1,     4,    -1,     7,    18,     5,    19,     4,    20,    -1
+      25,    17,    -1,     4,    -1,     1,    -1,    -1,    25,    26,
+      -1,    26,    -1,     7,    18,     5,    19,     4,    20,    -1
 };
 
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    24,    24,    25,    28,    29,    33,    34,    35,    38,
+       0,    24,    24,    25,    28,    29,    32,    36,    37,    38,
       41
 };
 #endif
@@ -481,14 +481,14 @@ static const yytype_uint16 yytoknum[] =
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    22,    23,    23,    24,    24,    25,    25,    25,    26,
+       0,    22,    23,    23,    24,    24,    24,    25,    25,    25,
       26
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
 static const yytype_uint8 yyr2[] =
 {
-       0,     2,     2,     1,     4,     1,     0,     2,     1,     1,
+       0,     2,     2,     1,     4,     1,     1,     0,     2,     1,
        6
 };
 
@@ -497,29 +497,29 @@ static const yytype_uint8 yyr2[] =
    means the default is an error.  */
 static const yytype_uint8 yydefact[] =
 {
-       0,     5,     0,     0,     3,     6,     1,     2,     9,     0,
-       0,     8,     0,     4,     7,     0,     0,     0,    10
+       0,     6,     5,     0,     0,     3,     7,     1,     2,     0,
+       0,     9,     0,     4,     8,     0,     0,     0,    10
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-      -1,     3,     4,    10,    11
+      -1,     4,     5,    10,    11
 };
 
 /* YYPACT[STATE-NUM] -- Index in YYTABLE of the portion describing
    STATE-NUM.  */
-#define YYPACT_NINF -9
+#define YYPACT_NINF -13
 static const yytype_int8 yypact[] =
 {
-      -2,    -9,    -8,     1,    -9,     2,    -9,    -9,    -9,    -7,
-      -4,    -9,     5,    -9,    -9,    -5,     8,    -3,    -9
+       2,   -13,   -13,   -12,     1,   -13,     4,   -13,   -13,    -9,
+      -7,   -13,     7,   -13,   -13,    -6,    10,    -5,   -13
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -9,    -9,    12,    -9,     6
+     -13,   -13,    12,   -13,     8
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]].  What to do in state STATE-NUM.  If
@@ -529,21 +529,21 @@ static const yytype_int8 yypgoto[] =
 #define YYTABLE_NINF -1
 static const yytype_uint8 yytable[] =
 {
-       8,     6,     1,     9,     2,     1,     8,     2,     5,     9,
-      15,    12,    17,    13,    16,     7,    14,    18
+       9,     7,     1,     1,     6,     2,     2,     3,     3,    12,
+      13,     9,    15,    16,    17,    18,     8,     0,    14
 };
 
-static const yytype_uint8 yycheck[] =
+static const yytype_int8 yycheck[] =
 {
-       4,     0,     4,     7,     6,     4,     4,     6,    16,     7,
-       5,    18,     4,    17,    19,     3,    10,    20
+       7,     0,     1,     1,    16,     4,     4,     6,     6,    18,
+      17,     7,     5,    19,     4,    20,     4,    -1,    10
 };
 
 /* YYSTOS[STATE-NUM] -- The (internal number of the) accessing
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,     4,     6,    23,    24,    16,     0,    24,     4,     7,
+       0,     1,     4,     6,    23,    24,    16,     0,    24,     7,
       25,    26,    18,    17,    26,     5,    19,     4,    20
 };
 
@@ -1365,16 +1365,16 @@ yyreduce:
   }
     break;
 
-  case 9:
-#line 38 "src/simplep4/src/compile.y"
+  case 6:
+#line 32 "src/simplep4/src/compile.y"
     {
-    fprintf(stderr, "Variable found in parser: %s\n", (yyvsp[(1) - (1)].stringVal));
+      fprintf(stderr, "ERROR FOUND\n");
   }
     break;
 
   case 10:
 #line 41 "src/simplep4/src/compile.y"
-    {
+    { //Works recursively
     fprintf(stderr, "Valid bit map\n");
   }
     break;

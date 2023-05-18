@@ -29,6 +29,9 @@ goal:
   | VARIABLE {
       fprintf(stderr, "Variable found: %s\n", $1);
   }
+  | error {
+      fprintf(stderr, "ERROR FOUND\n");
+  }
   ;
 parser:
   | parser line
