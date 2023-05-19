@@ -27,8 +27,16 @@ goals:
   | goal
   ;
 goal: 
-  HEADER CURLYOPEN parser CURLYCLOSE //Parse through fields
-  | INGRESS CURLYOPEN gressParser CURLYCLOSE //Parse through ingress tables
+  HEADER CURLYOPEN parser CURLYCLOSE { //Parse through fields
+    #if NEWTEST
+      fprintf(stderr, "Valid header \n");
+    #endif
+  }
+  | INGRESS CURLYOPEN gressParser CURLYCLOSE { //Parse through ingress tables
+    #if NEWTEST
+      fprintf(stderr, "Valid ingress \n");
+    #endif
+  }
   | VARIABLE {
     #if NEWTEST
       fprintf(stderr, "Variable found: %s\n", $1);
@@ -43,7 +51,7 @@ parser:
   ;
 headerLine:
   BIT OPENARROW INT CLOSEARROW VARIABLE SEMICOLON { //Works recursively
-  #if NEWTEST
+  #if SWITCHTEST
     fprintf(stderr, "Valid bit map\n");
   #endif
   }
@@ -76,7 +84,7 @@ metaParser:
   metaParser meta
   | meta
 meta:
-  MAXNUMENTRIES EQUAL INT
+  MAXNUMENTRIES EQUAL INT SEMICOLON
   | DEFAULTACTION EQUAL action
   ;
 actionList:

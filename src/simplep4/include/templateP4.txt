@@ -21,7 +21,7 @@ numEgressPorts:[number]
         default action when there are no matching entries (this would usually be send to controlplane to learn), max number of entries
 
 */ 
-header { 
+Header { 
     /* Example IP/TCP header */
     bit<4> version;
     bit<28> discard;
@@ -50,7 +50,7 @@ header {
                 [Potential action 2];
             }
             maxNumEntries = [Maximum number of entries];
-            defaultAcion = [Default action chosen from actions];
+            defaultAction = [Default action chosen from actions];
         }
         [Name of table N] = {
             ...

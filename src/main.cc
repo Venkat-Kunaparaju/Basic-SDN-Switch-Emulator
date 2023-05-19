@@ -261,8 +261,6 @@ int main() {
     threadinit();
 
     parseFile("test.txt");
-    parseFile("test.txt");
-
 
     testFunc();
     return 1;

@@ -32,7 +32,7 @@ int compileTest() {
 int compileMain() {
     #if SWITCHTEST
         std::cout << "COMPILER\n";
-    #endif SWITCHTEST
+    #endif
     compileInit();
     compileTest();
     return 1;

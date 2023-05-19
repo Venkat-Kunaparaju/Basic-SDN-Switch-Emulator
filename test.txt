@@ -1,1 +1,34 @@
-asdasdasd
+Header { 
+    bit<4> version;
+    bit<28> discard;
+    bit<32> discard;
+    bit<8> TTL;
+    bit<8> protocol;
+    bit<16> checksum;
+    bit<32> srcaddr;
+    bit<32> destaddr;
+}
+
+Ingress {
+    tables = {
+        Var = {
+            exact = {
+                adsdsa;
+                afsf;
+            }
+            could = {
+                fasf;
+                gdsag;
+            }
+            actions = {
+                drop;
+                forward;
+            }
+            maxNumEntries = 100;
+            defaultAction = drop;
+        }
+    
+    
+    }
+
+}
