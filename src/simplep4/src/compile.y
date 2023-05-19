@@ -16,7 +16,7 @@
 
 %token <stringVal> NOMATCH VARIABLE
 %token <intVal> INT
-%token HEADER BIT INGRESS EGRESS TABLES EXACT COULD ACTIONS MAXNUMENTRIES DEFAULTACTION
+%token HEADER BIT INGRESS EGRESS TABLES EXACT COULD ACTIONS MAXNUMENTRIES DEFAULTACTION DROP FORWARD
 %token CURLYOPEN CURLYCLOSE OPENARROW CLOSEARROW SEMICOLON EQUAL
 
 %%
@@ -48,7 +48,7 @@ headerLine:
   }
   ;
 
-//Ingress table parsing
+//Table parsing
 gressParser:
   TABLES EQUAL CURLYOPEN tableParser CURLYCLOSE
   ;
@@ -72,10 +72,25 @@ actionsParser:
   ACTIONS EQUAL CURLYOPEN actionList CURLYCLOSE
   ;
 metaParser:
+  metaParser meta
+  | meta
+meta:
+  MAXNUMENTRIES EQUAL INT
+  | DEFAULTACTION EQUAL action
   ;
 actionList:
+  actionList action
+  | action
   ;
+action:
+  DROP SEMICOLON
+  | FORWARD SEMICOLON
 fieldList:
+  fieldList field
+  | field
+  ;
+field:
+  VARIABLE SEMICOLON
   ;
 
 

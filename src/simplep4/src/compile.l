@@ -51,6 +51,14 @@
   return DEFAULTACTION;
 }
 
+"drop" {
+  return DROP;
+}
+
+"forward" {
+  return FORWARD;
+}
+
 "{" {
   return CURLYOPEN;
 }

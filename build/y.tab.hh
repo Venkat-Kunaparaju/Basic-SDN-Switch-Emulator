@@ -52,12 +52,14 @@
      ACTIONS = 268,
      MAXNUMENTRIES = 269,
      DEFAULTACTION = 270,
-     CURLYOPEN = 271,
-     CURLYCLOSE = 272,
-     OPENARROW = 273,
-     CLOSEARROW = 274,
-     SEMICOLON = 275,
-     EQUAL = 276
+     DROP = 271,
+     FORWARD = 272,
+     CURLYOPEN = 273,
+     CURLYCLOSE = 274,
+     OPENARROW = 275,
+     CLOSEARROW = 276,
+     SEMICOLON = 277,
+     EQUAL = 278
    };
 #endif
 /* Tokens.  */
@@ -74,12 +76,14 @@
 #define ACTIONS 268
 #define MAXNUMENTRIES 269
 #define DEFAULTACTION 270
-#define CURLYOPEN 271
-#define CURLYCLOSE 272
-#define OPENARROW 273
-#define CLOSEARROW 274
-#define SEMICOLON 275
-#define EQUAL 276
+#define DROP 271
+#define FORWARD 272
+#define CURLYOPEN 273
+#define CURLYCLOSE 274
+#define OPENARROW 275
+#define CLOSEARROW 276
+#define SEMICOLON 277
+#define EQUAL 278
 
 
 
@@ -93,7 +97,7 @@ typedef union YYSTYPE
     char stringVal[32];
 }
 /* Line 1529 of yacc.c.  */
-#line 97 "build/y.tab.hh"
+#line 101 "build/y.tab.hh"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
