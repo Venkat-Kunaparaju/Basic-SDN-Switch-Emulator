@@ -3,7 +3,9 @@
 
 /* Function used for temp testing */
 int testTemp() {
-    std::cerr << "TESTED\n";
+    #if SWITCHTEST
+        std::cerr << "TESTED\n";
+    #endif
 
     return 1;
 }
@@ -74,7 +76,9 @@ int dispatcherControlplane() {
             pthread_mutex_lock(&readFromDataplane);
 
             /* Read from buffer here */
-            fprintf(stdout, "%s", readDataplaneBuffer);
+            #if SWITCHTEST
+                fprintf(stdout, "%s", readDataplaneBuffer);
+            #endif
 
             pthread_mutex_unlock(&readFromDataplane);
             doneReadControlplane = 1;
@@ -93,14 +97,17 @@ int controlTest() {
     control.funcMap["Miss"]();
     //funcMap["Write"]();
     //writeDataToDataplane(testString1, BUFFERSIZE);
-
-    std::cout << "CONTINUING EXECUTION\n";
+    #if SWITCHTEST
+        std::cout << "CONTINUING EXECUTION\n";
+    #endif
     return 1;
 }
 
 //Main function called as thread by main
 int controlplaneMain() {
-    std::cout << "CONTROL\n";
+    #if SWITCHTEST
+        std::cout << "CONTROL\n";
+    #endif
     controlInit();
     controlTest();
     return 0;

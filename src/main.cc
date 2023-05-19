@@ -6,7 +6,9 @@
 
 //Dummy function just for random testing
 int dummyFunc() {
+#if SWITCHTEST
     std::cout << "NOTHING!\n";
+#endif
     return 1;
 }
 
@@ -118,7 +120,9 @@ int controlToData() {
 
             if (dataIsValid) {
                 /* DO Dataplane copying from controlplane data HERE */
-                std::cout << "COPYING BUFFER DATA TO DATAPLANE\n";
+                #if SWITCHTEST
+                    std::cout << "COPYING BUFFER DATA TO DATAPLANE\n";
+                #endif
 
                 if (!(verifyBufferNotNull(writeDataplaneBuffer))) {
                     exit(1);
@@ -155,7 +159,9 @@ int dataToControl() {
 
             if (dataIsValid) {
                 /* DO Dataplane copying to controlplane data HERE */
-                std::cout << "COPYING BUFFER DATA TO CONTROLPLANE\n";
+                #if SWITCHTEST
+                    std::cout << "COPYING BUFFER DATA TO CONTROLPLANE\n";
+                #endif
 
                 if (!(verifyBufferNotNull(writeControlplaneBuffer))) {
                     exit(1);
@@ -193,7 +199,9 @@ int simplep4ToData() {
 
             if (dataIsValid) {
                 /* DO copying HERE */
-                std::cout << "COPYING BUFFER DATA TO DATAPLANE FROM P4\n";
+                #if SWITCHTEST
+                    std::cout << "COPYING BUFFER DATA TO DATAPLANE FROM P4\n";
+                #endif
 
                 if (!(verifyBufferNotNull(writeDataplaneP4Buffer))) {
                     exit(1);
@@ -226,16 +234,36 @@ int testFunc() {
     // while(doneDataplane == 0);
     // pthread_mutex_lock(&readFromControlplane);
     // doneDataplane = 0;
-    //while(true);
+    while(true);
     //for (int i = 0; i < 100000000; i++); //Poll for a bit to allow other threads to execute
     return 1;
 }
 
+//Parse file
+int parseFile(char * fileName) {
+    FILE * p4File;
+    if ((p4File = fopen(fileName, "r"))) {
+        yypush_buffer_state(yy_create_buffer(p4File, YY_BUF_SIZE));
+        yyparse();
+        yypop_buffer_state();
+    }
+
+    fclose(p4File);
+
+    return 1;
+}
+
 int main() {
-    fprintf(stderr, "MAIN\n");
+    #if SWITCHTEST
+        fprintf(stderr, "MAIN\n");
+    #endif
     init();
     threadinit();
-    //testFunc();
-    yyparse();
+
+    parseFile("test.txt");
+    parseFile("test.txt");
+
+
+    testFunc();
     return 1;
 }

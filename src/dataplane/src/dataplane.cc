@@ -89,7 +89,9 @@ int dispatcherDataplane() {
             //Determine What to run based on data in readFromControlPlane
 
             /* Read from the buffer */
-            fprintf(stdout, "%s", readControlplaneBuffer);
+            #if SWITCHTEST
+                fprintf(stdout, "%s", readControlplaneBuffer);
+            #endif
 
             //population();
             pthread_mutex_unlock(&readFromControlplane); 
@@ -119,7 +121,9 @@ int readDataFromP4() {
             //Determine What to run based on data in readFromControlPlane
 
             /* Read from the buffer */
-            fprintf(stdout, "%s", readP4Buffer);
+            #if SWITCHTEST
+                fprintf(stdout, "%s", readP4Buffer);
+            #endif
 
             //population();
             pthread_mutex_unlock(&readFromSimplep4); 
@@ -137,7 +141,9 @@ Check for valid data done in compiler
 Return: 1 on sucess and population of respective fields
 */
 int population() {
-    std::cout << "POPULATION\n";
+    #if SWITCHTEST
+        std::cout << "POPULATION\n";
+    #endif
     return 1;
 }
 
@@ -178,7 +184,9 @@ int startUp() {
     return 1;
 }
 int dataplaneMain() {
-    std::cout << "DATAPLANE\n";
+    #if SWITCHTEST
+        std::cout << "DATAPLANE\n";
+    #endif
     startUp();
     dataplaneTest();
     return 0;

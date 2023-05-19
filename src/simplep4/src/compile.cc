@@ -30,7 +30,9 @@ int compileTest() {
 
 //Main function called by switchboard for compiler
 int compileMain() {
-    std::cout << "COMPILER\n";
+    #if SWITCHTEST
+        std::cout << "COMPILER\n";
+    #endif SWITCHTEST
     compileInit();
     compileTest();
     return 1;

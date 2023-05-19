@@ -30,10 +30,9 @@ goal:
   HEADER CURLYOPEN parser CURLYCLOSE //Parse through fields
   | INGRESS CURLYOPEN gressParser CURLYCLOSE //Parse through ingress tables
   | VARIABLE {
+    #if NEWTEST
       fprintf(stderr, "Variable found: %s\n", $1);
-  }
-  | error {
-      fprintf(stderr, "ERROR FOUND\n");
+    #endif
   }
   ;
 
@@ -44,7 +43,9 @@ parser:
   ;
 headerLine:
   BIT OPENARROW INT CLOSEARROW VARIABLE SEMICOLON { //Works recursively
+  #if NEWTEST
     fprintf(stderr, "Valid bit map\n");
+  #endif
   }
   ;
 

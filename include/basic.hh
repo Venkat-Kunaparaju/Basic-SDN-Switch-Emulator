@@ -9,6 +9,8 @@
 
 
 #define BUFFERSIZE 4906
+#define SWITCHTEST 0
+#define NEWTEST 1
 
 /* User and control plane resources */
 struct ctrl {
