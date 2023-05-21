@@ -37,6 +37,11 @@ goal:
       fprintf(stderr, "Valid ingress \n");
     #endif
   }
+  | EGRESS CURLYOPEN gressParser CURLYCLOSE { //Parse through ingress tables
+    #if NEWTEST
+      fprintf(stderr, "Valid egress \n");
+    #endif
+  }
   | VARIABLE {
     #if NEWTEST
       fprintf(stderr, "Variable found: %s\n", $1);
@@ -68,7 +73,7 @@ tableParser:
 table: 
   VARIABLE EQUAL CURLYOPEN tableDataParser CURLYCLOSE
   ;
-tableDataParser:
+tableDataParser: //Parse information for one table
   exactParser couldParser actionsParser metaParser
   ;
 exactParser:

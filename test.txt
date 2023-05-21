@@ -32,3 +32,27 @@ Ingress {
     }
 
 }
+
+Egress {
+    tables = {
+        Var = {
+            exact = {
+                adsdsa;
+                afsf;
+            }
+            could = {
+                fasf;
+                gdsag;
+            }
+            actions = {
+                drop;
+                forward;
+            }
+            maxNumEntries = 100;
+            defaultAction = drop;
+        }
+    
+    
+    }
+
+}
