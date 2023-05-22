@@ -76,10 +76,10 @@ table:
 tableDataParser: //Parse information for one table
   exactParser couldParser actionsParser metaParser
   ;
-exactParser:
+exactParser: //Parse exact fields
   EXACT EQUAL CURLYOPEN fieldList CURLYCLOSE
   ;
-couldParser:
+couldParser: //Parse could fields
   COULD EQUAL CURLYOPEN fieldList CURLYCLOSE
   ;
 actionsParser:
