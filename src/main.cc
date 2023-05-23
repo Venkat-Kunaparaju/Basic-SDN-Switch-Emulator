@@ -22,6 +22,18 @@ int verifyBufferNotNull(char * buf) {
     return 1;
 }
 
+//Sets table type to Ingress (1)
+int setToIngress() {
+    tableType = 1;
+    return 1;
+}
+
+//Sets table type to Egress (0)
+int setToEgress() {
+    tableType = 0;
+    return 1;
+}
+
 
 
 //Initialize threads to handle each component
@@ -100,7 +112,7 @@ int init() {
 
     pthread_mutex_lock(&readFromSimplep4);
     
-
+    tableType = 2;
     //Set up usercontrolplane
     //funcMap["Write"] = testTemp;
     controlMain();

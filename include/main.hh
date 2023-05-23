@@ -66,6 +66,10 @@ int controlToData();
 int dataToControl();
 int simplep4ToData();
 
+/* Switchboard variables */
+int tableType; //1 if Ingress, 0 if Egress
+
+
 
 
 

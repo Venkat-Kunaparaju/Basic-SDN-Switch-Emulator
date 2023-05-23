@@ -11,6 +11,7 @@
 #define BUFFERSIZE 4906
 #define SWITCHTEST 0
 #define NEWTEST 1
+#define COMPILEDEBUG 1
 
 /* User and control plane resources */
 struct ctrl {
@@ -22,3 +23,5 @@ struct ctrl {
 
 //Helper functions 
 int verifyBufferNotNull(char *);
+int setToIngress();
+int setToEgress();

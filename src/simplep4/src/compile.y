@@ -17,7 +17,7 @@
 %token <stringVal> NOMATCH VARIABLE
 %token <intVal> INT
 %token HEADER BIT INGRESS EGRESS TABLES EXACT COULD ACTIONS MAXNUMENTRIES DEFAULTACTION DROP FORWARD
-%token CURLYOPEN CURLYCLOSE OPENARROW CLOSEARROW SEMICOLON EQUAL
+%token CURLYOPEN CURLYCLOSE OPENARROW CLOSEARROW SEMICOLON EQUAL COMSTART COMEND ANYTHING
 
 %%
 
@@ -42,11 +42,28 @@ goal:
       fprintf(stderr, "Valid egress \n");
     #endif
   }
+  | COMSTART anythingList COMEND {
+    #if NEWTEST
+      fprintf(stderr, "Valid comment\n");
+    #endif
+  }
   | VARIABLE {
     #if NEWTEST
       fprintf(stderr, "Variable found: %s\n", $1);
     #endif
   }
+  ;
+
+
+//Any test parser
+anythingList:
+  anythingList ANYTHING
+  | ANYTHING
+  | anythingList VARIABLE
+  | VARIABLE
+  | anythingList INT
+  | INT
+  |
   ;
 
 //Header parsing
@@ -77,7 +94,11 @@ tableDataParser: //Parse information for one table
   exactParser couldParser actionsParser metaParser
   ;
 exactParser: //Parse exact fields
-  EXACT EQUAL CURLYOPEN fieldList CURLYCLOSE
+  EXACT EQUAL CURLYOPEN fieldList CURLYCLOSE {
+    #if COMPILEDEBUG
+      fprintf(stderr, "Exact fields parsed\n");
+    #endif
+  }
   ;
 couldParser: //Parse could fields
   COULD EQUAL CURLYOPEN fieldList CURLYCLOSE

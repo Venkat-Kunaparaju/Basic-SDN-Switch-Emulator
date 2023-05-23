@@ -83,6 +83,15 @@
   return EQUAL;
 }
 
+"/*" {
+  return COMSTART;
+}
+
+"*/" {
+  return COMEND;
+}
+
+
 [0-9]+ { //Matches with a sequence of numbers
   yylval.intVal = atoi(yytext);
   return INT;
@@ -92,5 +101,15 @@
   memcpy(yylval.stringVal, yytext, 32);
   return VARIABLE;
 }
+
+[^ <>\(\)"\n\t;,]+ { //Everything that a variable can not have in it
+  memcpy(yylval.stringVal, yytext, 32);
+  return VARIABLE;
+}
+
+[^ \\] {
+  return ANYTHING;
+}
+
 
 %%

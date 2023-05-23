@@ -59,7 +59,10 @@
      OPENARROW = 275,
      CLOSEARROW = 276,
      SEMICOLON = 277,
-     EQUAL = 278
+     EQUAL = 278,
+     COMSTART = 279,
+     COMEND = 280,
+     ANYTHING = 281
    };
 #endif
 /* Tokens.  */
@@ -84,6 +87,9 @@
 #define CLOSEARROW 276
 #define SEMICOLON 277
 #define EQUAL 278
+#define COMSTART 279
+#define COMEND 280
+#define ANYTHING 281
 
 
 
@@ -97,7 +103,7 @@ typedef union YYSTYPE
     char stringVal[32];
 }
 /* Line 1529 of yacc.c.  */
-#line 101 "build/y.tab.hh"
+#line 107 "build/y.tab.hh"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
