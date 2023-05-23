@@ -1,5 +1,5 @@
 %{
-  #include <../../../include/basic.hh>
+  #include <compiley.hh>
 
   // Declare stuff from Flex that Bison needs to know about:
   extern int yylex();
@@ -31,25 +31,29 @@ goal:
     #if NEWTEST
       fprintf(stderr, "Valid header \n");
     #endif
+    #if COMPILEDEBUG
+      fprintf(stderr, "Header parsed\n");
+    #endif
   }
   | INGRESS CURLYOPEN gressParser CURLYCLOSE { //Parse through ingress tables
     #if NEWTEST
       fprintf(stderr, "Valid ingress \n");
+    #endif
+    #if COMPILEDEBUG
+      fprintf(stderr, "Ingress tables parsed\n");
     #endif
   }
   | EGRESS CURLYOPEN gressParser CURLYCLOSE { //Parse through ingress tables
     #if NEWTEST
       fprintf(stderr, "Valid egress \n");
     #endif
+    #if COMPILEDEBUG
+      fprintf(stderr, "Egress tables parsed\n");
+    #endif
   }
   | COMSTART anythingList COMEND {
     #if NEWTEST
       fprintf(stderr, "Valid comment\n");
-    #endif
-  }
-  | VARIABLE {
-    #if NEWTEST
-      fprintf(stderr, "Variable found: %s\n", $1);
     #endif
   }
   ;
@@ -88,17 +92,17 @@ tableParser:
    | table
    ;
 table: 
-  VARIABLE EQUAL CURLYOPEN tableDataParser CURLYCLOSE
+  VARIABLE EQUAL CURLYOPEN tableDataParser CURLYCLOSE {
+    #if COMPILEDEBUG
+      fprintf(stderr, "%s table parsed\n", $1);
+    #endif
+  }
   ;
 tableDataParser: //Parse information for one table
   exactParser couldParser actionsParser metaParser
   ;
 exactParser: //Parse exact fields
-  EXACT EQUAL CURLYOPEN fieldList CURLYCLOSE {
-    #if COMPILEDEBUG
-      fprintf(stderr, "Exact fields parsed\n");
-    #endif
-  }
+  EXACT EQUAL CURLYOPEN fieldList CURLYCLOSE
   ;
 couldParser: //Parse could fields
   COULD EQUAL CURLYOPEN fieldList CURLYCLOSE
@@ -133,5 +137,5 @@ field:
 
 
 void yyerror(const char *s) {
-    fprintf(stderr, "ERROR: %s\n", s);
+    fprintf(stderr, "Parsing error!\n");
 }
