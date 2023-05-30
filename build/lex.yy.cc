@@ -383,8 +383,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	(yy_more_offset) = 0; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 26
-#define YY_END_OF_BUFFER 27
+#define YY_NUM_RULES 25
+#define YY_END_OF_BUFFER 26
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -392,52 +392,42 @@ struct yy_trans_info
 	flex_int32_t yy_verify;
 	flex_int32_t yy_nxt;
 	};
-static yyconst flex_int16_t yy_acclist[260] =
+static yyconst flex_int16_t yy_acclist[167] =
     {   0,
-       27,   23,   24,   25,   26,    1,   25,   26,    1,   26,
-       25,   26,   23,   24,   25,   26,   23,   24,   25,   26,
-       22,   23,   24,   25,   26,   18,   25,   26,   16,   25,
-       26,   19,   23,   24,   25,   26,   17,   25,   26,   23,
-       24,   25,   26,   23,   24,   25,   26,   23,   24,   25,
-       26,   23,   24,   26,   23,   24,   25,   26,   23,   24,
-       25,   26,   23,   24,   25,   26,   23,   24,   25,   26,
-       23,   24,   25,   26,   23,   24,   25,   26,   23,   24,
-       25,   26,   23,   24,   25,   26,   14,   23,   24,   25,
-       26,   15,   23,   24,   25,   26,   23,   24,   21,   23,
+       26,   23,   24,   25,    1,   24,   25,    1,   25,   24,
+       25,   23,   24,   25,   23,   24,   25,   22,   23,   24,
+       25,   18,   24,   25,   16,   24,   25,   19,   23,   24,
+       25,   17,   24,   25,   23,   24,   25,   23,   24,   25,
+       23,   24,   25,   23,   25,   23,   24,   25,   23,   24,
+       25,   23,   24,   25,   23,   24,   25,   23,   24,   25,
+       23,   24,   25,   23,   24,   25,   23,   24,   25,   14,
+       23,   24,   25,   15,   23,   24,   25,   23,   21,   23,
+       20,   23,   22,   23,   23,   23,   23,   23,   23,   23,
+       23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
 
-       24,   20,   23,   24,   22,   23,   24,   23,   24,   23,
-       24,   23,   24,   23,   24,   23,   24,   23,   24,   23,
-       24,   23,   24,   23,   24,   23,   24,   23,   24,   23,
-       24,   23,   24,   23,   24,   23,   24,   23,   24,    3,
-       23,   24,   23,   24,   23,   24,   23,   24,   23,   24,
-       23,   24,   23,   24,   23,   24,   23,   24,   23,   24,
-       23,   24,   23,   24,   23,   24,   23,   24,   12,   23,
-       24,   23,   24,   23,   24,   23,   24,   23,   24,   23,
-       24,   23,   24,   23,   24,   23,   24,    8,   23,   24,
-       23,   24,    7,   23,   24,   23,   24,   23,   24,   23,
-
-       24,    5,   23,   24,    2,   23,   24,   23,   24,   23,
-       24,   23,   24,   23,   24,   23,   24,    6,   23,   24,
-        4,   23,   24,    9,   23,   24,   23,   24,   13,   23,
-       24,   23,   24,   23,   24,   23,   24,   23,   24,   23,
-       24,   23,   24,   23,   24,   23,   24,   23,   24,   23,
-       24,   23,   24,   11,   23,   24,   10,   23,   24
+        3,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+       23,   23,   23,   23,   23,   12,   23,   23,   23,   23,
+       23,   23,   23,   23,   23,    8,   23,   23,    7,   23,
+       23,   23,   23,    5,   23,    2,   23,   23,   23,   23,
+       23,   23,    6,   23,    4,   23,    9,   23,   23,   13,
+       23,   23,   23,   23,   23,   23,   23,   23,   23,   23,
+       23,   23,   11,   23,   10,   23
     } ;
 
 static yyconst flex_int16_t yy_accept[105] =
     {   0,
-        1,    1,    1,    2,    6,    9,   11,   13,   17,   21,
-       26,   29,   32,   37,   40,   44,   48,   52,   55,   59,
-       63,   67,   71,   75,   79,   83,   87,   92,   97,   99,
-      102,  105,  108,  110,  112,  114,  116,  118,  120,  122,
-      124,  126,  128,  130,  132,  134,  136,  138,  140,  143,
-      145,  147,  149,  151,  153,  155,  157,  159,  161,  163,
-      165,  167,  169,  172,  174,  176,  178,  180,  182,  184,
-      186,  188,  191,  193,  196,  198,  200,  202,  205,  208,
-      210,  212,  214,  216,  218,  221,  224,  227,  229,  232,
-      234,  236,  238,  240,  242,  244,  246,  248,  250,  252,
+        1,    1,    1,    2,    5,    8,   10,   12,   15,   18,
+       22,   25,   28,   32,   35,   38,   41,   44,   46,   49,
+       52,   55,   58,   61,   64,   67,   70,   74,   78,   79,
+       81,   83,   85,   86,   87,   88,   89,   90,   91,   92,
+       93,   94,   95,   96,   97,   98,   99,  100,  101,  103,
+      104,  105,  106,  107,  108,  109,  110,  111,  112,  113,
+      114,  115,  116,  118,  119,  120,  121,  122,  123,  124,
+      125,  126,  128,  129,  131,  132,  133,  134,  136,  138,
+      139,  140,  141,  142,  143,  145,  147,  149,  150,  152,
+      153,  154,  155,  156,  157,  158,  159,  160,  161,  162,
 
-      254,  257,  260,  260
+      163,  165,  167,  167
     } ;
 
 static yyconst flex_int32_t yy_ec[256] =
@@ -555,10 +545,10 @@ static yyconst flex_int16_t yy_chk[154] =
     } ;
 
 /* Table of booleans, true if rule could match eol. */
-static yyconst flex_int32_t yy_rule_can_match_eol[27] =
+static yyconst flex_int32_t yy_rule_can_match_eol[26] =
     {   0,
 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-    0, 0, 0, 0, 0, 1, 0,     };
+    0, 0, 0, 0, 1, 0,     };
 
 extern int yy_flex_debug;
 int yy_flex_debug = 0;
@@ -597,7 +587,7 @@ char *yytext_ptr;
   #include <y.tab.hh>
   extern int yylex();
 
-#line 601 "build/lex.yy.cc"
+#line 591 "build/lex.yy.cc"
 
 #define INITIAL 0
 
@@ -781,7 +771,7 @@ YY_DECL
     
 #line 9 "src/simplep4/src/compile.l"
 
-#line 785 "build/lex.yy.cc"
+#line 775 "build/lex.yy.cc"
 
 	if ( !(yy_init) )
 		{
@@ -1049,27 +1039,19 @@ YY_RULE_SETUP
 }
 	YY_BREAK
 case 24:
+/* rule 24 can match eol */
 YY_RULE_SETUP
 #line 105 "src/simplep4/src/compile.l"
-{ //Everything that a variable can not have in it
-  memcpy(yylval.stringVal, yytext, 32);
-  return VARIABLE;
-}
-	YY_BREAK
-case 25:
-/* rule 25 can match eol */
-YY_RULE_SETUP
-#line 110 "src/simplep4/src/compile.l"
 {
   return ANYTHING;
 }
 	YY_BREAK
-case 26:
+case 25:
 YY_RULE_SETUP
-#line 115 "src/simplep4/src/compile.l"
+#line 110 "src/simplep4/src/compile.l"
 ECHO;
 	YY_BREAK
-#line 1073 "build/lex.yy.cc"
+#line 1055 "build/lex.yy.cc"
 			case YY_STATE_EOF(INITIAL):
 				yyterminate();
 
@@ -2052,6 +2034,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 115 "src/simplep4/src/compile.l"
+#line 110 "src/simplep4/src/compile.l"
 
 

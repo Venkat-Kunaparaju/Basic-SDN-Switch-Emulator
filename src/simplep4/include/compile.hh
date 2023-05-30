@@ -14,6 +14,26 @@ int compileInit();
 int compileMain();
 int writeToDataplaneFromP4(char * buffer, int size);
 int compileTest();
+int setP4Parsing();
+
+
+//Yacc parsing
+extern int yyparse();
+
+#ifndef YY_TYPEDEF_YY_BUFFER_STATE
+#define YY_TYPEDEF_YY_BUFFER_STATE
+typedef struct yy_buffer_state *YY_BUFFER_STATE;
+#endif
+
+#ifndef YY_BUF_SIZE
+#define YY_BUF_SIZE 16384
+#endif
+
+extern void yypush_buffer_state(YY_BUFFER_STATE);
+extern YY_BUFFER_STATE yy_create_buffer(FILE *, int);
+extern void yypop_buffer_state();
+
+extern std::string p4Parsing; //compile.y; Populates string during runtime with the protocol for table communication
 
 
 
@@ -29,17 +49,17 @@ Control plane needs to mention exact fields, and could mention could fields.
 /* Protocol for communication between simplep4 and dataplane */
 /*
 Variables
-X = Table<table num>:<exact field names seperated by commas (includes comma after last field name)><space>
+X = <Table variable name><space>
 <exact field names seperated by commas (includes comma after last field name)><space>
 <could field names seperated by commas (includes comma after last field name)><space>
-<actions seperated by commas (includes comma after last action)><space><default action><space>
+<actions seperated by commas (includes comma after last action)>space>
 <max number of entries><space>
+<default action><space>
 
+Y = [Header field, Header Metadata]
 
 *ACTUAL PROTOCOL*
-SYN<space><header fields speerated by commas (includes comma after last field name)><space>
-<header metadata seperated by commas(includes comma after last metadata)><space>
-NumTables:<number of tables><space>
+SYN<space><Ys speerated by commas (includes comma after last field name)><space>
 <X[i] for i in tables>
 
 

@@ -11,21 +11,6 @@ extern int controlMain(); //Usercontrolplane main
 extern int compileMain(); //Compiler main
 extern int parseFile(); //Parsing p4 file
 
-//Yacc parsing
-extern int yyparse();
-
-#ifndef YY_TYPEDEF_YY_BUFFER_STATE
-#define YY_TYPEDEF_YY_BUFFER_STATE
-typedef struct yy_buffer_state *YY_BUFFER_STATE;
-#endif
-
-#ifndef YY_BUF_SIZE
-#define YY_BUF_SIZE 16384
-#endif
-
-extern void yypush_buffer_state(YY_BUFFER_STATE);
-extern YY_BUFFER_STATE yy_create_buffer(FILE *, int);
-extern void yypop_buffer_state();
 
 
 

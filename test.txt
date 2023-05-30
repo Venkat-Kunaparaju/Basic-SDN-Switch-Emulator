@@ -9,17 +9,16 @@ Header {
     bit<32> destaddr;
 }
 
-
 Ingress {
     tables = {
         Var = {
             exact = {
-                adsdsa;
-                afsf;
+                srcaddr;
+                destaddr;
             }
             could = {
-                fasf;
-                gdsag;
+                protocol;
+                TTL;
             }
             actions = {
                 drop;
@@ -37,13 +36,13 @@ Ingress {
 Egress {
     tables = {
         Var2 = {
-            exact = {
-                adsdsa;
-                afsf;
+           exact = {
+                srcaddr;
+                destaddr;
             }
             could = {
-                fasf;
-                gdsag;
+                protocol;
+                TTL;
             }
             actions = {
                 drop;

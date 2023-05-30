@@ -251,19 +251,9 @@ int testFunc() {
     return 1;
 }
 
-//Parse file
-int parseFile(char * fileName) {
-    FILE * p4File;
-    if ((p4File = fopen(fileName, "r"))) {
-        yypush_buffer_state(yy_create_buffer(p4File, YY_BUF_SIZE));
-        yyparse();
-        yypop_buffer_state();
-    }
 
-    fclose(p4File);
 
-    return 1;
-}
+
 
 int main() {
     #if SWITCHTEST
@@ -271,8 +261,6 @@ int main() {
     #endif
     init();
     threadinit();
-
-    parseFile("test.txt");
 
     testFunc();
     return 1;

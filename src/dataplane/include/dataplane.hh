@@ -35,7 +35,7 @@ std::vector<std::string> header; //Collection of Fields of header of packet
 std::vector<int> headerMetadata; //Parallel to header vector to contain bits considered in field
 
 /* Vectors shouldn't change across compile requests */
-std::vector<std::string> metadata; //Collection of Metadata given to packet during pipeline2
+std::vector<std::string> metadata; //Collection of Metadata given to packet during pipeline
 std::vector<std::string> actions; //Collection of Actions potentially to give to packet
 
 struct fields
@@ -73,3 +73,6 @@ struct pipeline
 };
 
 struct pipeline * simplePipeline;
+
+std::string validMetadata[] = {"Ingress Port", "Egress Port"}; //Metadata
+std::string validActions[] = {"Drop", "Forward"}; //Actions

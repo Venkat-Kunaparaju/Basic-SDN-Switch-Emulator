@@ -19,6 +19,8 @@ int compileInit() {
     pthread_mutex_lock(&writeToDataplane);
     doneWriteP4 = 0;
 
+    setP4Parsing();
+
     return 1;
 }
 
@@ -28,12 +30,35 @@ int compileTest() {
     return 1;
 }
 
+//Parse file
+int parseFile(char * fileName) {
+    FILE * p4File;
+    if ((p4File = fopen(fileName, "r"))) {
+        yypush_buffer_state(yy_create_buffer(p4File, YY_BUF_SIZE));
+        yyparse();
+        yypop_buffer_state();
+    }
+
+    fclose(p4File);
+
+    return 1;
+}
+
+//Sets to initial string for p4 parsing
+int setP4Parsing () {
+    p4Parsing = "SYN "; //Sets the intial state of p4 parsing string
+}
+
 //Main function called by switchboard for compiler
 int compileMain() {
     #if SWITCHTEST
         std::cout << "COMPILER\n";
     #endif
     compileInit();
+
+    parseFile("test.txt");
+
+
     compileTest();
     return 1;
 }

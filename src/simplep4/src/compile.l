@@ -102,11 +102,6 @@
   return VARIABLE;
 }
 
-[^ <>\(\)"\n\t;,]+ { //Everything that a variable can not have in it
-  memcpy(yylval.stringVal, yytext, 32);
-  return VARIABLE;
-}
-
 [^ \\] {
   return ANYTHING;
 }
