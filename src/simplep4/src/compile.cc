@@ -46,6 +46,11 @@ int parseFile(char * fileName) {
 
 //Sets to initial string for p4 parsing
 int setP4Parsing () {
+
+    tableParsing.clear();
+    metaParsing.clear();
+    entryParsing.clear();
+
     p4Parsing = "SYN "; //Sets the intial state of p4 parsing string
 }
 

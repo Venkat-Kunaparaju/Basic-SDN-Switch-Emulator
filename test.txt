@@ -33,23 +33,26 @@ Ingress {
 
 }
 
+
+/* Check if this is a valid comment */
+
 Egress {
     tables = {
         Var2 = {
            exact = {
-                srcaddr;
+                version;
                 destaddr;
             }
             could = {
-                protocol;
+                checksum;
                 TTL;
             }
             actions = {
                 drop;
                 forward;
             }
-            maxNumEntries = 100;
-            defaultAction = drop;
+            maxNumEntries = 200;
+            defaultAction = forward;
         }
     
     
@@ -57,7 +60,6 @@ Egress {
 
 }
 
-/* Check if this is a valid comment */
 
 /* 
 Check if this is a valid comment 

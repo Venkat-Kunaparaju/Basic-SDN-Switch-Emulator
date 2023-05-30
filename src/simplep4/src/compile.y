@@ -24,7 +24,7 @@
 //Main parsing
 main:
   goals { //Make sure data is getting parsed properly
-    std::cerr << p4Parsing; 
+    std::cerr << "\nParsed data:\n" << p4Parsing; 
   }
   ;
 goals:

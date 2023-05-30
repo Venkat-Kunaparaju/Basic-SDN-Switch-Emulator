@@ -34,6 +34,9 @@ extern YY_BUFFER_STATE yy_create_buffer(FILE *, int);
 extern void yypop_buffer_state();
 
 extern std::string p4Parsing; //compile.y; Populates string during runtime with the protocol for table communication
+extern std::string tableParsing; //Sub helper parser for tables
+extern std::string metaParsing; //Sub helper parser for actions
+extern std::string entryParsing; //Sub helper parser for max num entries
 
 
 
