@@ -25,6 +25,9 @@
 main:
   goals { //Make sure data is getting parsed properly
     std::cerr << "\nParsed data:\n" << p4Parsing; 
+    
+    //Write parsed data to dataplane
+    writeToDataplaneFromP4((char *)p4Parsing.c_str(), BUFFERSIZE);
   }
   ;
 goals:

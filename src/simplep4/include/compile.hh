@@ -39,6 +39,8 @@ extern std::string metaParsing; //Sub helper parser for actions
 extern std::string entryParsing; //Sub helper parser for max num entries
 
 
+//Protocol ids
+char * initialParse = "SYN ";
 
 //Protocols
 

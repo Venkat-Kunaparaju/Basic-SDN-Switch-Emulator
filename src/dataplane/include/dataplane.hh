@@ -27,6 +27,7 @@ int dataplaneInit();
 int writeDataToControlplane(char * buffer, int size);
 int dataplaneTest();
 int readDataFromP4();
+int populateHeader();
 
 
 
@@ -76,3 +77,7 @@ struct pipeline * simplePipeline;
 
 std::string validMetadata[] = {"Ingress Port", "Egress Port"}; //Metadata
 std::string validActions[] = {"Drop", "Forward"}; //Actions
+
+
+//Protocol ids
+extern char * initialParse;

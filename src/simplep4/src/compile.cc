@@ -51,7 +51,9 @@ int setP4Parsing () {
     metaParsing.clear();
     entryParsing.clear();
 
-    p4Parsing = "SYN "; //Sets the intial state of p4 parsing string
+    p4Parsing = initialParse; //Sets the intial state of p4 parsing string
+
+    return 1;
 }
 
 //Main function called by switchboard for compiler
@@ -64,6 +66,6 @@ int compileMain() {
     parseFile("test.txt");
 
 
-    compileTest();
+    //compileTest();
     return 1;
 }

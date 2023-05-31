@@ -80,6 +80,10 @@ int dummyStart() {
 
 
 }
+//Used to populate header from information from P4; read from readP4buffer
+int populateHeader() { //TODO
+    return 1;
+}
 
 // Thread runs this and blocks on data coming in from control plane. Runs correct operation based on data.
 int dispatcherDataplane() {
@@ -124,6 +128,16 @@ int readDataFromP4() {
             #if SWITCHTEST
                 fprintf(stdout, "%s", readP4Buffer);
             #endif
+
+            char type[5]; //Store type of request temporarily and to determine what to do
+            memcpy(type, readP4Buffer, 4); //Includes space after type
+            type[4] = '\0';
+            //fprintf(stderr, "%s\n", type);
+
+            if (strcmp(type, initialParse) == 0) { //SYN
+                populateHeader();
+                fprintf(stderr, "Handle SYN request!");
+            }
 
             //population();
             pthread_mutex_unlock(&readFromSimplep4); 

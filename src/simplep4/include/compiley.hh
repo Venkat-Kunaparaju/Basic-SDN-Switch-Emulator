@@ -3,6 +3,7 @@
 //Header file for lex/yacc
 
 extern int setP4Parsing();
+extern int writeToDataplaneFromP4(char *, int);
 
 std::string p4Parsing; //Populates string during runtime with the protocol for table communication
 std::string tableParsing; //Sub helper parser for tables
