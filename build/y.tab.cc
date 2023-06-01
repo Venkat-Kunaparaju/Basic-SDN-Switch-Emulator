@@ -1444,7 +1444,7 @@ yyreduce:
         case 2:
 #line 26 "src/simplep4/src/compile.y"
     { //Make sure data is getting parsed properly
-    std::cerr << "\nParsed data:\n" << p4Parsing; 
+    //std::cerr << "\nParsed data:\n" << p4Parsing; 
     
     //Write parsed data to dataplane
     writeToDataplaneFromP4((char *)p4Parsing.c_str(), BUFFERSIZE);

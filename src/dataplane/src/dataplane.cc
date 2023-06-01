@@ -81,8 +81,37 @@ int dummyStart() {
 
 }
 //Used to populate header from information from P4; read from readP4buffer
-int populateHeader() { //TODO
-    return 1;
+//Returns index end position of header. Takes starting position to start reading from
+int populateHeader(int start) {
+    int i = start;
+    int openBrack = 0;
+    int comma = 0;
+    int closeBrack = 0;
+
+    std::string P4str(readP4Buffer);
+
+
+    while(true) {
+        //Parse through seperators between fieldnames and metadata 
+        openBrack = P4str.find("[", openBrack + 1);
+
+        //Break if no more headers to parse
+        if (std::string::npos == openBrack) {
+            break;
+        }
+
+        comma = P4str.find(",", comma + 1);
+        closeBrack = P4str.find("]", closeBrack + 1);
+
+        std::string fieldName = P4str.substr(openBrack + 1, comma - openBrack - 1);
+        std::string fieldMeta = P4str.substr(comma + 1, closeBrack - comma - 1);
+
+        std::cerr << fieldName << " " << fieldMeta << "\n";
+        
+        comma = P4str.find(",", comma + 1); //Discards commas inbetween fields
+    }
+
+    return i;
 }
 
 // Thread runs this and blocks on data coming in from control plane. Runs correct operation based on data.
@@ -135,7 +164,7 @@ int readDataFromP4() {
             //fprintf(stderr, "%s\n", type);
 
             if (strcmp(type, initialParse) == 0) { //SYN
-                populateHeader();
+                populateHeader(4); //Parse through header
                 fprintf(stderr, "Handle SYN request!");
             }
 

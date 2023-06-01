@@ -27,7 +27,7 @@ int dataplaneInit();
 int writeDataToControlplane(char * buffer, int size);
 int dataplaneTest();
 int readDataFromP4();
-int populateHeader();
+int populateHeader(int);
 
 
 
