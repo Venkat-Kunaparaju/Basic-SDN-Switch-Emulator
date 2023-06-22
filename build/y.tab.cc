@@ -475,11 +475,11 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    26,    26,    34,    35,    38,    50,    59,    68,    78,
-      79,    80,    81,    82,    83,    84,    89,    90,    93,   110,
-     113,   114,   117,   130,   145,   151,   157,   166,   167,   169,
-     174,   175,   181,   182,   185,   186,   192,   193,   196,   203,
-     204,   205,   207,   212
+       0,    26,    26,    34,    35,    38,    50,    59,    67,    77,
+      78,    79,    80,    81,    82,    83,    88,    89,    92,   109,
+     112,   113,   116,   131,   146,   152,   158,   167,   168,   170,
+     175,   176,   182,   183,   186,   187,   193,   194,   197,   204,
+     205,   206,   208,   213
 };
 #endif
 
@@ -1476,7 +1476,7 @@ yyreduce:
     #if COMPILEDEBUG
       fprintf(stderr, "Ingress tables parsed\n");
     #endif
-    setToIngress();
+    setToEgress();
   }
     break;
 
@@ -1489,12 +1489,11 @@ yyreduce:
     #if COMPILEDEBUG
       fprintf(stderr, "Egress tables parsed\n");
     #endif
-    setToEgress();
   }
     break;
 
   case 8:
-#line 68 "src/simplep4/src/compile.y"
+#line 67 "src/simplep4/src/compile.y"
     {
     #if NEWTEST
       fprintf(stderr, "Valid comment\n");
@@ -1503,7 +1502,7 @@ yyreduce:
     break;
 
   case 18:
-#line 93 "src/simplep4/src/compile.y"
+#line 92 "src/simplep4/src/compile.y"
     { //Works recursively
   #if SWITCHTEST
     fprintf(stderr, "Valid bit map\n");
@@ -1520,7 +1519,7 @@ yyreduce:
     break;
 
   case 22:
-#line 117 "src/simplep4/src/compile.y"
+#line 116 "src/simplep4/src/compile.y"
     {
     #if COMPILEDEBUG
       fprintf(stderr, "%s table parsed\n", (yyvsp[(1) - (5)].stringVal));
@@ -1531,11 +1530,13 @@ yyreduce:
     p4Parsing.append(" ");
     p4Parsing.append(tableParsing);
     tableParsing.clear();
+
+    counter();
   }
     break;
 
   case 23:
-#line 130 "src/simplep4/src/compile.y"
+#line 131 "src/simplep4/src/compile.y"
     {
     //Indicate end of meta parsing
     tableParsing.append(entryParsing);
@@ -1552,7 +1553,7 @@ yyreduce:
     break;
 
   case 24:
-#line 145 "src/simplep4/src/compile.y"
+#line 146 "src/simplep4/src/compile.y"
     {
     //Indicate end of exact parsing
     tableParsing.append(" ");
@@ -1560,7 +1561,7 @@ yyreduce:
     break;
 
   case 25:
-#line 151 "src/simplep4/src/compile.y"
+#line 152 "src/simplep4/src/compile.y"
     {
     //Indicate end of could parsing
     tableParsing.append(" ");
@@ -1568,7 +1569,7 @@ yyreduce:
     break;
 
   case 26:
-#line 157 "src/simplep4/src/compile.y"
+#line 158 "src/simplep4/src/compile.y"
     {
     //Indicate end of action parsing
     tableParsing.append(metaParsing);
@@ -1579,7 +1580,7 @@ yyreduce:
     break;
 
   case 29:
-#line 169 "src/simplep4/src/compile.y"
+#line 170 "src/simplep4/src/compile.y"
     {
     //Parse maxnumentries 
     entryParsing.append(std::to_string((yyvsp[(3) - (4)].intVal)));
@@ -1588,7 +1589,7 @@ yyreduce:
     break;
 
   case 31:
-#line 175 "src/simplep4/src/compile.y"
+#line 176 "src/simplep4/src/compile.y"
     { //Catch errors and report them
     yyerror("Unknown meta variable!");
     YYABORT;
@@ -1596,7 +1597,7 @@ yyreduce:
     break;
 
   case 35:
-#line 186 "src/simplep4/src/compile.y"
+#line 187 "src/simplep4/src/compile.y"
     { //Catch errors and report them
     yyerror("Unknown action!");
     YYABORT;
@@ -1604,7 +1605,7 @@ yyreduce:
     break;
 
   case 38:
-#line 196 "src/simplep4/src/compile.y"
+#line 197 "src/simplep4/src/compile.y"
     {
     //Parse each field
     tableParsing.append((yyvsp[(1) - (2)].stringVal));
@@ -1613,7 +1614,7 @@ yyreduce:
     break;
 
   case 42:
-#line 207 "src/simplep4/src/compile.y"
+#line 208 "src/simplep4/src/compile.y"
     {
     //Parse action
     metaParsing.append("Drop");
@@ -1622,7 +1623,7 @@ yyreduce:
     break;
 
   case 43:
-#line 212 "src/simplep4/src/compile.y"
+#line 213 "src/simplep4/src/compile.y"
     {
     //Parse action
     metaParsing.append("Forward");
@@ -1633,7 +1634,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 1637 "build/y.tab.cc"
+#line 1638 "build/y.tab.cc"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1847,7 +1848,7 @@ yyreturn:
 }
 
 
-#line 222 "src/simplep4/src/compile.y"
+#line 223 "src/simplep4/src/compile.y"
 
 
 

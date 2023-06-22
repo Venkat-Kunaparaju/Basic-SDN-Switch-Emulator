@@ -19,6 +19,8 @@ int compileInit() {
     pthread_mutex_lock(&writeToDataplane);
     doneWriteP4 = 0;
 
+    setToIngress(); //Set initial table type for parsing
+
     setP4Parsing();
 
     return 1;
@@ -54,6 +56,28 @@ int setP4Parsing () {
     p4Parsing = initialParse; //Sets the intial state of p4 parsing string
 
     return 1;
+}
+
+//Sets table type to Ingress (1)
+int setToIngress() {
+    tableType = 1;
+    return 1;
+}
+
+//Sets table type to Egress (0)
+int setToEgress() {
+    tableType = 2;
+    return 1;
+}
+
+//Increment type of table
+int counter() {
+    if (tableType == 1) {
+        tableIngressCounter += 1;
+    }
+    else {
+        tableEgressCounter += 1;
+    }
 }
 
 //Main function called by switchboard for compiler

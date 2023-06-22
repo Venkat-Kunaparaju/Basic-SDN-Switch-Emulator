@@ -28,7 +28,10 @@ int writeDataToControlplane(char * buffer, int size);
 int dataplaneTest();
 int readDataFromP4();
 int populateHeader(int);
+int populateTable(int);
 
+extern int tableIngressCounter; //Counters for parsing number of tables
+extern int tableEgressCounter;
 
 
 /* Vectors used to validate information */

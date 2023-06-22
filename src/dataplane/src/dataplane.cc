@@ -111,8 +111,22 @@ int populateHeader(int start) {
         comma = P4str.find(",", comma + 1); //Discards commas inbetween fields
     }
 
-    return i;
+    return closeBrack + 1;
 }
+
+//Used to populate table information from P4; read from readP4buffer
+//Returns index end position of tables
+//TODO
+int populateTable(int start) {
+
+    std::string P4str(readP4Buffer);
+    P4str = P4str.substr(start, P4str.length() - start);
+    std::cerr << P4str << "\n";
+
+
+    std::cerr << tableIngressCounter << tableEgressCounter; //Use counters to determine the number of tables to read
+}
+
 
 // Thread runs this and blocks on data coming in from control plane. Runs correct operation based on data.
 int dispatcherDataplane() {
@@ -164,8 +178,9 @@ int readDataFromP4() {
             //fprintf(stderr, "%s\n", type);
 
             if (strcmp(type, initialParse) == 0) { //SYN
-                populateHeader(4); //Parse through header
                 fprintf(stderr, "Handle SYN request!");
+                populateTable(populateHeader(4)); //Parse pipeline
+
             }
 
             //population();

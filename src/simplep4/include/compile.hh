@@ -10,6 +10,10 @@ char writeDataplaneP4Buffer[BUFFERSIZE];
 
 char * testString4 = "Hola! This is a message from p4 to the dataplane!\n";
 
+int tableIngressCounter; //Counter to keep track of number of ingress tables
+int tableEgressCounter; //Counter to keep track of number of egress tables
+int tableType; //Keep track of type of table
+
 int compileInit();
 int compileMain();
 int writeToDataplaneFromP4(char * buffer, int size);

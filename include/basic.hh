@@ -23,7 +23,11 @@ struct ctrl {
 
 //Helper functions 
 int verifyBufferNotNull(char *);
+
+
+//For parsing
 int setToIngress();
 int setToEgress();
+int counter();
 
 

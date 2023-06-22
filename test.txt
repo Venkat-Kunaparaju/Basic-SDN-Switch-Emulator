@@ -1,3 +1,5 @@
+/* Can only parse in ingress then egress order */
+
 Header { 
     bit<4> version;
     bit<28> discard;
@@ -8,6 +10,7 @@ Header {
     bit<32> srcaddr;
     bit<32> destaddr;
 }
+
 
 Ingress {
     tables = {

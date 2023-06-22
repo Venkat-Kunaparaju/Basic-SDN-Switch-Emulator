@@ -54,7 +54,7 @@ goal:
     #if COMPILEDEBUG
       fprintf(stderr, "Ingress tables parsed\n");
     #endif
-    setToIngress();
+    setToEgress();
   }
   | EGRESS CURLYOPEN gressParser CURLYCLOSE { //Parse through ingress tables
     #if NEWTEST
@@ -63,7 +63,6 @@ goal:
     #if COMPILEDEBUG
       fprintf(stderr, "Egress tables parsed\n");
     #endif
-    setToEgress();
   }
   | COMSTART anythingList COMEND {
     #if NEWTEST
@@ -124,6 +123,8 @@ table:
     p4Parsing.append(" ");
     p4Parsing.append(tableParsing);
     tableParsing.clear();
+
+    counter();
   }
   ;
 tableDataParser: //Parse information for one table
