@@ -5,8 +5,8 @@ comp = src/simplep4/src/compile.cc
 l = src/simplep4/src/compile.l
 y = src/simplep4/src/compile.y
 
-CCo = g++ -I include -o
-CCc = g++ -c
+CCo = g++ -g -I include -o
+CCc = g++ -g f-c
 
 DCCc = g++ -I src/dataplane/include -c $(d) -o 
 CCCc = g++ -I src/controlplane/include -c $(cont) -o
